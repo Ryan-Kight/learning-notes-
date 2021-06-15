@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function* generator(){
+            let pre1 = 1;
+            let pre2 = 1;
+            let n = 1;
+            while(true){
+                if(n <= 2){
+                    yield 1;
+                }else{
+                    let newValue = pre1 + pre2;
+                    yield newValue;
+                    pre1 = pre2;
+                    pre2 = newValue;
+                }
+                n ++;
+            }
+        }
+        const generator1 = generator();
+    </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+Promise 异步处理
+JS运行的环境称之为宿主环境
+执行栈：call stack 一种数据结构，将函数的执行环境压入栈，执行完销毁。 每一个函数都必须创建他自己的上下文
+执行时机，被宿主环境控制。
+浏览器宿主环境拥有5个线程：
+    1.JS引擎    JS引擎与GUI引擎会相互影响
+    2.GUI线程  
+    3.事件监听线程
+    4.计时线程
+    5.网络线程
+
+所有执行操作都是JS引擎完成的，那么异步是一个怎么样的流程呢？
+    首先，执行栈中会放入全局的上下文，然后同步代码依次出现上下文，要是遇到异步了，就开启所对应的异步线程，
+等到同步代码执行完毕，全局上下文消失，栈空的时候，JS引擎会去查看任务队列中是否有需要完成的任务，如果有的话，
+将会把任务放入执行栈中执行，开启的异步线程当发现条件满足时，会将任务从异步线程中放入事件队列中，等待JS引擎查看。
+
+事件队列，分为两个队列：
+    1.宏队列 大多数异步函数都会进入宏队列
+    2.微队列（相当于VIP队列，在微队列中的任务会被率先读取到执行栈中执行）MutationObserver，Promise产生的回调会进入微队列
+
+事件回调函数的缺陷：
+    1.回调地狱 完成一件事情要多次嵌套异步函数，导致代码线条混乱，维护系数高。
+    2.异步与异步之间的联系会较为杂乱。
+
+异步处理函数的通用模型：
+ES6 将异步操作分为两个阶段：     unsettled （未决阶段）        settled （已决阶段）
+    将处理事情分为了三种情况：    pending（挂起状态）   resolved （成功） rejected（失败）
+
+Promise：
+首先，在未决阶段时，将需要准备事项依次准备就绪，经由条件，是事件进入已决阶段。 （此段代码为同步）
+然后通过返回的Promise对象，对resolve或者reject进行函数注册。
+
+Promise的基本使用：
+const pro = new Promise((resolve,reject) => {
+    一系列未决状态下发生的事情，
+    比如开启一个计时线程啊，ajax请求啊
+    然后在异步中，引导至已决阶段。
+    比如请求成功进入resolve回调
+    比如计时线程中做条件判断，也是导向已决阶段。
+})
+pro.then((res) => {
+    为resolved状态注册回调函数，拿到收获的信息，传入注册的函数，进行下一步操作。
+})
+pro.catch((res) => {
+    为rejected状态注册回调函数，拿到收获的信息，通知什么地方出错了。
+})
+
+细节汇总：
+1.未决阶段的代码是同步代码（就是在为函数导向绑定回调的阶段）
+2.thenable和catchable，就是.then() 与 .catch() 中注册的函数是异步的，这些注册的函数放入微队列中
+3.pro.then()可以既添加thenable函数，又可以添加catchable函数，而pro.catch()只能注册catchable函数
+4.在未决阶段报错，抛出错误，会直接导致rejected状态，从来执行catch注册的函数。
+5.但凡到达了已决阶段，状态是不可以发生改变的。
+
+***Promise 并不是消除回调，而是让回调变得可控了。
+
+Promise串联
+当下一个Promise对象需要依赖上一个Promise对象所在已决阶段得到的数据时，将Promise串联。
+Promise对象中，then与catch所注册的回调函数会返回一个全新的Promise对象。
+而这个全新的Promise对象，是依靠then与catch所注册的回调函数执行过程中的成功与失败所决定自己在已决阶段下的状态的。
+而then与catch中所return出去的返回值，则是作为在为新Promise对象注册then，catch函数时所需要的状态参数。
+如果上一个的返回值需要等待，那么下一个注册函数会随着等待。
+e.g：const pro = new Promise((resolve, reject) => {
+    resolve(1);
+});
+pro.then(res => res * 2)    // 后面加加注释，告诉这是在干嘛，返回的值，提供了什么信息。
+        .then(res => res * 2)
+            .then(res => console.log(res));
+这样就很清楚每一次异步嵌套在做些什么事情。
+
+Promise剩余API
+1.pro.finally（）是给promise对象注册一个无论成功与否都会执行的一个函数。
+2.直接给Promise设定是resolved状态还是rejected状态。 const pro = Promise.resolve(1);
+3.Promise.all(iterable) 常用于处理多个promise对象集合
+    返回一个新的Promise对象，当里面所有Promise对象都变成resolved 的时候，那么这个新的Promise对象才会是resolved状态
+    然后，按照顺序，携同每一个Promise对象的数据包成数组传入新的Promise注册的then回调函数的参数里。
+    如果有一个失败，那么直接进入rejected状态，携同错误数据传入catch函数的参数中。
+4.Promise.race（iterable）只要传入的Promise的对象中有一个达到了已决状态，那就执行对应的状态。
+
+Promise.all() && Promise.race() 都是返回新的Promise对象，为新的对象注册函数，就可以完成对应的功能了。
+
+async和await是ES2016新增的两个关键字
+async是为了简化在函数中 返回Promise对象创建过程
+在函数前加上async 执行该函数返回的就是一个Promise对象
+return出来的进入resolve
+throw出来的进入reject 
+async function test (){
+    console.log(1);
+    return 2;
+}
+相当于：
+function test(){
+    return new Promise((resolve,reject) => {
+        console.log(1);
+        resolve(2);
+    })
+}
+await关键字用在函数调用前，await一定要用在async函数里。
+因为await需要等待异步结果，不放在async中就会阻塞。
+await... 等她返回的数据。 e.g: const data = await ajax({});
+async + await + 立即执行;
+const result = await 1; 等于  Promise.resolve(1).then(data => {const result = data;})

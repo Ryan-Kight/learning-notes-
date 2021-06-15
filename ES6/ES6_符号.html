@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const test = (()=>{
+            const private = Symbol('外界应该是访问不到我的');
+            return {
+                name : 'ryan',
+                age : 20,
+                tell(){
+                    this[private]();
+                },
+                [private](){
+                    console.log(`${this.name}今年${this.age}岁啦`)
+                } //私有化属性
+            }
+        })()
+        test.tell();
+        // for-in 不能访问符号属性，符号属性不能被枚举
+        // for(const prop in test){
+        //     console.log(prop);
+        // }
+        // console.log(Object.keys(test)); Object.keys()也访问不了
+        // Object.getOwnPropertyNames(test) 也整不了 得到自己的属性名
+        // 为了能读取到字符属性，ES6专门提供了一个方法
+        // console.log(Object.getOwnPropertySymbols(test));
+        // 会独立将对象中用字符命名的属性读到一个数组里返回出去。
+        // const fun = Object.getOwnPropertySymbols(test)[0];
+        // test[fun](); 用这种特殊方式也可以访问到字符属性中到内容。
+        const arr = [3];
+        console.log(arr.concat(56,[2,35,3]));
+        Array[Object.isConcatSpreadable] = false;
+        console.log(arr.concat(56,[2,35,3]));
+    </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+ECMAScript 简称ES 是一种语言标准
+JavaScript 是运行在浏览器端的语言，该语言使用ES标准。 JS = ES + Web API
+NodeJS 是运行在服务器端的语言，该语言也使用了ES标准。NodeJS = ES + node API
+JavaScript 和 NodeJS 都是 ES 的 超集。（super set）
+ES的关键版本：
+    ES 3.0 ---- 1999年
+    ES 5.0 ---- 2009年
+    ES 6.0 ---- 2015年，从该版本之后，不再使用数字作为编号，而是使用年份。 e.g : ES2019
+
+ES6 解决了JS无法开发大型应用的语言层面的问题。

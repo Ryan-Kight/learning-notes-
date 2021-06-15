@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+        <p><input type="number" value="0"></p>
+        <p><input type="number" value="0"></p>
+        <p><input type="number" value="0"></p>
+        <p><input type="number" value="0"></p>
+        <p><input type="number" value="0"></p>
+        <p><input type="number" value="0"></p>
+        <p><input type="number" value="0"></p>
+        <p><input type="number" value="0"></p>
+        <p><input type="number" value="0"></p>
+        <p><input type="number" value="0"></p>
+        <p><button>计算</button></p>
+        <p>最大值 : <span id="spanmax"></span></p>
+        <p>最小值 : <span id="spanmin"></span></p>
+    
+    <script>
+        // function sum (a=1,b=2,c,d){
+            
+        //     a= 2;
+        //     console.log(arguments);
+        //     return a + b + c + d;
+        // }
+        // function sum(...args){
+        //     let result = 0;
+        //     args.forEach(function(item){
+        //         result += item;
+        //     })
+        //     console.log(result);
+        // }
+        // arr = [1,2,3,4,5];
+
+        // const obj1 = {
+        //     name : ['ryan','kight'],
+        //     age : 18,
+        //     sex : '男'
+        // }
+        // const obj2 = {
+        //     ...obj1,
+        //     name : [...obj1.name]
+        // }
+
+        // const btn = document.getElementsByTagName('button')[0];
+        // btn.onclick = function(){
+        //     const inputs = document.querySelectorAll('input');
+        //     // document.getElementsBy...的方式是类数组，不是真实的数组。
+        //     const arr = [];
+        //     inputs.forEach(function(ele){
+        //         arr.push(+ele.value);
+        //     })
+        //     spanmax.innerText = Math.max(...arr);
+        //     // id在html中可以直接使用，html中id属性是唯一的，所以会自动挂载到window对象上
+        //     spanmin.innerText = Math.min(...arr);
+        // }
+
+        // //柯里化
+        // function exp (a,b,c,d){
+        //     return a + b * c - d;
+        // }
+        
+        // function curry (func , ...args){
+        //     return function(...subs){
+        //         const allsubs = [...args, ...subs];
+        //         if(allsubs.length >= func.length){
+        //             // length 是js函数对象的一个属性值，该值是指 “该函数有多少个必须要传入的参数”，即形参的个数
+        //             return func(...allsubs);
+        //         }else{
+        //             return curry(func,...allsubs);
+        //         }
+        //     }
+        // }
+        
+        // console.log(exp(1,2,3,4));
+        // const keli = curry(exp,1,2);
+        // console.log(keli(3,4));
+        // const newCal = curry(exp,1);
+        // console.log(newCal(2,3));
+
+        // const test = () => {
+        //     console.log(this);
+        // }
+        // const obj = {
+        //     method : test
+        // }
+
+        let arr1 = [1,2,3,4,5,6,7,8,9];
+        // arr1.forEach(ele => {
+        //     console.log(ele);
+        // });
+        // console.log(arr1.every(ele =>  ele > 0 ));
+        // console.log(arr1.some(ele => ele > 5));
+        // const arr2 = arr1.filter(ele => ele > 5);
+        // console.log(arr2);
+        // console.log(arr1.find(ele => ele == 2));
+        // console.log(arr1.map(ele => ({number : ele , name : 'ryan'+ele})));
+        // console.log(arr1.reduce((a,b) => a+b));
+
+       
+
+
+    </script>
+</body>
+</html>

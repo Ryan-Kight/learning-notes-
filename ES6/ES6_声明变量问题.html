@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper"></div>
+    <script>
+        // if(Math.random() < 0.5){
+        //     let a = 1;  //块级作用域内有效
+        //     console.log(a);
+        // } else{
+        //     console.log(a);//报错
+        // }
+        // console.log(a);//报错 a is not defined
+
+        // var wrapper = document.getElementsByClassName('wrapper')[0];
+        // for(var i = 1; i <= 10; i ++){ 
+        // 由于var声明的变量提升到了全局，所以最后访问到的是全局里的最终结果
+        //     var btn = document.createElement('button');
+        //     btn.innerHTML = "按钮" + i;
+        //     wrapper.appendChild(btn);
+        //     (function(i){
+        //         btn.onclick = function(){
+        //             console.log(i);
+        //         }
+        //     }(i))
+        // }
+
+        // console.log(a);
+        // var a = 1; //undefined 因为变量会提升
+
+        // console.log(a);
+        // let a = 1; //Cannot access 'a' before initialization
+        // 底层是将let声明的变量存入暂时性死区中，当执行到let语句时，将它从暂时性死区中释放。
+        // 所以报错不是报 a is not defined
+
+        let wrapper = document.getElementsByClassName('wrapper')[0];
+        for(let i = 1; i <= 10; i ++){
+            let btn = document.createElement('button');
+            btn.innerHTML = '按钮' + i;
+            btn.onclick = function(){
+                console.log(i);
+            }
+            wrapper.appendChild(btn);
+        }
+        a = {
+            name : 'ryan',
+            age : 18,
+            sex : '男'
+        }
+        for(const prop in a){
+            console.log(prop);
+        }
+        
+
+
+
+
+    </script>
+</body>
+</html>

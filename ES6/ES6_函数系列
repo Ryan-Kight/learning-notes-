@@ -1,0 +1,52 @@
+参数默认值：
+在书写参数的时候，直接赋值，即为默认值。
+只要给函数加上参数默认值，会自动变成严格模式，arguments与形参会脱离。
+在不传递参数的位置只能写undefined。这样默认值才能生效。
+形参声明和ES6中的const与let声明变量一样，存在暂时性死区(function(a = b, b){})，b就是一个暂时性死区，a访问不到
+
+剩余参数：
+专门用于收集末尾传递的参数，将其放置到一个形参数组中。
+function a (...args){} a(1,2,3,4); args = [1,2,3,4];
+
+展开运算符
+对数组进行展开 sum(...arr) arr是个数组，在将数组传递给函数的时候，参数依次传递。
+克隆数组 const arr1 = [1,2,3,4] const arr2 = [...arr1];
+
+对对象进行展开 
+const obj1 = {name : , age : , sex : } 克隆对象 const obj2 = {...obj1};
+
+剩余参数和展开运算符练习：
+ 求最大最小值
+ 函数柯里化 柯里化用于固定某个函数前面到某几个参数，得到一个新的函数，新函数调用到时候接收剩余函数。
+
+ES6提供了一个特殊的API，可以使用该API在函数内部，判断该函数是否是通过new的方法调用的。
+new.target 不是如果不是new的话，就会返回undefined。 相当于是在函数内 if(new.target == undefined){new Error('此方法要new！')}
+
+箭头函数
+箭头函数是一个函数表达式 function(){} 这就是匿名函数表达式
+const func = (参数) => {函数体中的内容}
+箭头函数中其实是没有this，arguments，new.target这一说的，如果用到向外寻找。
+所以箭头函数中的this 就是可以用this代替整个箭头函数，在外一层环境中的this是什么就是什么。
+如果参数只有一个，可以省略小括号， e.g: 参数 => {函数体中的内容}
+如果只有一条语句，可以省略{} return 
+const isOdd = num => num%2 !== 0;
+如果只有一条语句，并且要直接返回对象的话，加() e.g:  const sum = (a,b) => ({sum : a + b});
+应用场景：
+    1.临时性使用函数
+        - 事件处理函数
+        - 异步处理函数
+        - 其他临时函数
+    2.为了绑定外层this的函数
+    3.数组中的一些方法都可以用箭头函数来提高代码整洁。
+
+数组方法补充：
+    .every(function(ele){ return ele >= 60}) 数组中每一个都需要大于60才能返回true 要是一个不大于就返回false
+    .some(function(ele){ return ele >= 60})  数组中只要有一个大于60就返回true，都不大于返回false
+    .filter(function(ele){ return ele > 60}) 返回一个新的数组，只有大于60才能装在新数组中(过滤作用)
+    .find(function(ele){ return ele > 60})   返回第一个满足条件的元素， 若是没有找到就返回undefined
+    .map(function(ele){ return ele*2})       映射数组，将数组中的每一项映射成符合条件的，并装入数组中
+    .reduce(function(a,b){ return a+b})      统计，累计
+
+
+
+

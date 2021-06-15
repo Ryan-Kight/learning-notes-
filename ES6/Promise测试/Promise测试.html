@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 辅助函数,把传进来的对象拼接成url的字符串
+        function toData(obj) {
+            if (obj === null) {
+                return obj;
+            }
+            let arr = [];
+            for (let i in obj) {
+                let str = i + "=" + obj[i];
+                arr.push(str);
+            }
+            return arr.join("&");
+        }
+        // 封装Ajax
+        function ajax(obj) {
+            return new Promise((resolve, reject) => {
+                //指定提交方式的默认值
+                obj.type = obj.type || "get";
+                //设置是否异步，默认为true(异步)
+                obj.async = obj.async || true;
+                //设置数据的默认值
+                obj.data = obj.data || null;
+                // 根据不同的浏览器创建XHR对象
+                let xhr = null;
+                if (window.XMLHttpRequest) {
+                    // 非IE浏览器
+                    xhr = new XMLHttpRequest();
+                } else {
+                    // IE浏览器
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                // 区分get和post,发送HTTP请求
+                if (obj.type === "post") {
+                    xhr.open(obj.type, obj.url, obj.async);
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    let data = toData(obj.data);
+                    xhr.send(data);
+                } else {
+                    let url = obj.url + "?" + toData(obj.data);
+                    xhr.open(obj.type, url, obj.async);
+                    xhr.send();
+                }
+                // 接收返回过来的数据
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status >= 200 && xhr.status < 300 || xhr.status == 304) {
+                            resolve(JSON.parse(xhr.responseText))
+                        } else {
+                            reject(xhr.status)
+                        }
+                    }
+                }
+            })
+        }
+
+        async function getTeacher(){
+            const students = await ajax({url : './data/students.json'});
+            // console.log(students);
+            let classId = 0;
+            students.forEach(ele => {
+                if(ele.name == '李华'){
+                    classId = ele.classId;
+                }
+            });
+            const classes = await ajax({url : './data/classes.json'});
+            let teacherId = 0;
+            classes.forEach(ele => {
+                ele.id == classId ? teacherId = ele.teacherId : null;
+            });
+            const teachers = await ajax({url : './data/teachers.json'});
+            // console.log(teachers);
+            teachers.forEach(ele => {
+                ele.id == teacherId ? console.log(ele.name) : null;
+            })
+        }
+        getTeacher();
+
+        // ajax({
+        //     url : './data/students.json',
+        // }).then(res => {
+        //     let result;
+        //     res.forEach(ele => {
+        //         if(ele.name == '李华'){
+        //             result = ele.classId;
+        //         }
+        //     })
+        //     return result;
+        // }).then(classId => {
+        //     return ajax({
+        //         url : './data/classes.json',
+        //     }).then(res => {
+        //         let teacherId;
+        //         res.forEach(ele => {
+        //             ele.id == classId ? teacherId = ele.teacherId : null;
+        //         })
+        //         return teacherId;
+        //     })
+        // }).then(teacherId => {
+        //     ajax({
+        //         url : './data/teachers.json',
+        //     }).then(res => {
+        //         res.forEach(ele => {
+        //             if(ele.id == teacherId){
+        //                 console.log(ele);
+        //             }
+        //         })
+        //     })
+        // })
+
+        
+        // function randamTime(min,max){
+        //     return Math.floor(Math.random()*(max - min) + min)
+        // }
+        // function biaobai(lady){
+        //     return new Promise((resolve,reject) => {
+        //         console.log('已向' + lady + '发出表白意向！');
+        //         setTimeout(() => {
+        //             if(Math.random() > 0.9){
+        //                 resolve(true);
+        //             }else{
+        //                 resolve(false);
+        //             }
+        //         },randamTime(1000,3000))
+        //     })
+        // }
+        // const god = [];
+        // for(let i = 1; i <= 10; i++){
+        //     god.push('女神' + i);
+        // }
+        // let pro;
+        // const ladyText = [];
+        // for(let i = 0; i < god.length; i++){
+        //     if(i === 0){
+        //         pro = biaobai(god[i]);
+        //     }
+        //     pro = pro.then(res => {
+        //         if(res){
+        //             console.log('success');
+        //             return;
+        //         }else if(res === undefined){
+        //             return;
+        //         }else{
+        //             console.log('fail')
+        //             if(i < god.length - 1){
+        //                 return biaobai(god[i+1])
+        //             }
+        //         }
+        //     });
+        // }
+        
+
+        
+
+    </script>
+</body>
+</html>

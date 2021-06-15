@@ -1,0 +1,70 @@
+Fetch API
+1.并非取代AJAX，而是对AJAX传统API的改进
+2.精细功能分割
+3.使用Promise API，利于异步代码的书写。
+4.Fetch API 并非ES6的内容，属于HTML5新增的web API。
+
+基本使用：
+使用fetch函数，可以立即向服务器发送网络请求。
+    fetch(url, 配置对象) 
+    配置对象config = {
+                    method:'get',   //请求方式
+                    headers:{       //配置请求头
+                        "Content-Type" : "application/json",
+                        可以自定义 a : 1
+                    },
+                    body:'{"a":"1"}', //用Post的时候
+                    credentials : 是否携带cookie （ omit 默认不带cookie，same-origin：请求同源cookie，include），
+                    cache:配置缓存模式
+                }
+    
+    fetch函数的返回值是一个Promise对象    只要是服务器给了响应，就是resolve
+    .text() 将消息体中的内容解析成字符串
+    .json() 将消息体中的内容解析成json数组
+    .blob() 将消息体中的内容解析成二进制文件
+    .redirect() 可以重定向url
+
+    fetch模式 ：
+    async + await + fetchAPI
+
+    response 有ok，status这些属性
+             有text(),json()等方法 全是异步的
+             因为异步的都可以等await
+
+    #request对象
+    通过创建request对象完成请求
+    new Request(url,{配置})
+    尽量保持request对象都是新的
+
+    #response对象
+    为了测试，在后端还没有做完的时候
+    new Response对象用于测试前端代码
+
+    #headers对象
+    在request和response对象内部，会转换为Headers
+    Headers对象中的方法：
+        has(key) 检查请求头中是否存在指定key值
+        get(key) 得到相应key值
+        set(key,value) 修改对应的键值对
+        append(key,value) 添加
+        keys()
+        values()
+        entries()得到键值对的集合
+
+    文件上传
+    1.客户端将文件数据发送给服务器
+    2.服务器保存上传的文件数据到服务器端
+    3.服务器响应回客户端一个文件访问地址
+
+    请求方式：      post
+    请求表单格式：   multipart/form-data
+    请求体中必须包含一个键值对，键的名称是服务器要求的名称，表单域名称：imagefile 值是数据
+
+    input元素上有一个files 记录了文件数据
+    利用html5中的formdata构造函数 构建请求体
+        formdata = new FormData();
+        formdata.append("imagefiles",inp.files[0]);
+    然后利用fetch传输到后台
+    fetch(url,{method : Post,body:formdata})
+    
+

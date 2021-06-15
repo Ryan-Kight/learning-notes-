@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 解构对象
+        // const user = {
+        //     name : 'ryan',
+        //     sex : '男',
+        //     age : 20,
+        //     address : {
+        //         area : '上海市',
+        //         city : '浦东新区'
+        //     }
+        // }
+        // const {name, sex, age, address} = user;
+        // console.log(name, sex, age, address);
+        // const {name, sex, age, address, city = '上海'}  = user;
+        // console.log(name, sex, age, address, city);
+        // const {name, sex : gender, age, address : {area,city}} = user;
+        // console.log(name, gender, age, area, city);
+
+        //解构数组
+        // const arr = [1,2,{name : 'ryan',age : 20}];
+        // const [a, b, c] = arr;
+        // console.log(a, b, c);
+        // const [a, , b] = arr;
+        // console.log(a,b);
+        // const [a, , {name,age}] = arr;
+        // console.log(a, name, age);
+        // const [a, ...obj] = arr;
+        // console.log(a,obj);
+        // 利用数组解构，进行两个值的交换
+        // let a = 1,b = 2;
+        // [b, a] = [a, b];
+        // console.log(a,b);
+        // const user = {
+        //     name : 'ryan',
+        //     sex : '男',
+        //     age : 20,
+        //     address : {
+        //         area : '上海市',
+        //         city : '浦东新区'
+        //     }
+        // }
+        // function print({name,sex,age,address : {area, city} = {}} = {}){
+        //     console.log(name,sex,age,area,city);
+        // }
+        // 举个例子，封装一个功能函数
+        // function ajax(
+        //     {type = 'get', url = '/', data : {name, password} = {}, success = function(){}} = {}
+        // ){
+        //     console.log(type, url, name, password, success);
+        // }
+        // // 调用ajax进行传输
+        // ajax({
+        //     data : {
+        //         name : 'ryan',
+        //         password : 123
+        //     },
+        //     success : function(){
+        //         console.log('pass');
+        //     }
+        // })
+
+    </script>
+</body>
+</html>

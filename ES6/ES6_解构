@@ -1,0 +1,42 @@
+解构：
+    什么是解构？
+    将一个对象或者函数中的某个属性提取到某个变量中。
+
+1. 对象解构
+    let name, sex, age;
+    ({name, sex, age} = user;)
+    使user对象中的name, sex, age提取到外面定义到let变量中。
+    常用对象解构书写形式:
+    let {name, sex, age} = user;
+    定义变量，从对象中读取同名属性，放入变量中。
+
+    在解构时，可以使用默认值。
+    let {name, sex, age, address = 123} = user;
+
+    非同名属性解构（ 可以用不同到变量名接收解构出来的属性值 ）
+    let {name, sex : gender, age, address} = user;
+
+    如果层级嵌套，想要获取里面到值，可以标识嵌套位。
+    let {name, sex, age, address : {area, city}} = user;
+
+2. 解构数组
+    const {0:n1, 1:n2} = arr; 数组也可以理解为对象，但还是有些麻烦。
+    进一步优化一下：
+    let a, b;
+    [a, b] = arr;
+    用方括号到形式进行解构，其余类比对象。
+    常用数组解构书写格式：
+    const [a, b, c] = arr;
+    const [a,,b] = arr;
+    const [a, b, c = 1] = arr;
+    const [a, ...obj] = arr; 将第一个数组元素提取出来，之后的打包成对象；
+    let [a, b] = [a, b];
+
+3.参数直接解构（较为常用）
+    function(原本要往里面传一个数组或对象的，可以利用解构的方法做参数校验和提取){}
+    function({name, sex, age, address : {province, city}}){
+        console.log(name, sex, age, province, city);
+    }
+   不能解构undefined与null，解构的部分可以看做一个匿名参数，也可以赋予默认值，所以可以用赋默认值的方式，防止未传参数报错
+   
+    

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const variety = 'variety';
+        function Person (name, age){
+            return {
+                name,
+                age,
+                print(){
+                    console.log(this.age,this.name);
+                },
+                [variety](){
+                    console.log('我是变量属性名！');
+                }
+            }
+        }
+        const obj = new Person('ryan',18);
+        obj[variety]();
+        const obj1 = {
+            phone : 13817208562,
+            address : '上海',
+            name : 'kight'
+        }
+        const obj2 = {
+            ...obj,
+            ...obj1
+        }
+        console.log(Object.getOwnPropertyNames(obj2));
+        const smallprototype = {
+            happy(){
+                console.log(this.name + '要快乐哦');
+            }
+        }
+        Object.setPrototypeOf(obj2,smallprototype);
+
+        class Human {
+            constructor(name,age,num){
+                this.name = name;
+                this.age = age;
+                this.num = num;
+            }
+            ziduan = 'ziduan';
+            static lover = '女神';
+            tell(){
+                console.log(this.name,this.age,Human.lover);
+            }
+            growUp(){
+                this.age++;
+            }
+        }
+        class Man extends Human{
+            constructor(name,age,num){
+                
+                super(name,age,num);
+                this.sex = '男';
+            }
+
+        }
+        const ryan = new Human('ryan',18,1);
+        const zcy = new Man('zcy',20,2);
+
+
+
+
+    </script>
+</body>
+</html>

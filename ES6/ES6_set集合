@@ -1,0 +1,40 @@
+set集合：
+    set用于存放不重复的数据。
+
+用构造函数建立
+const s = new Set() 创建一个没有任何东西的set集合
+          new Set(iterable可迭代对象) 将迭代对象作为内容放入set集合中
+    String类型也是可以迭代对象，可以用set进行字符串去重。
+
+set方法
+    add(数据) 添加一个数据到set集合的末尾
+    has(数据) 判断set集合中是否包含该数据
+    delete(数据) 删除匹配数据
+    clear() 清空整个set集合
+    属性值size 获取set集合中的元素个数
+
+如何与数组进行转换
+const s = new Set([]);
+由于set本身也是一个可迭代对象
+const arr = [...s];
+
+如何遍历？
+使用for of 循环
+使用set中的实例方法 
+forEach() （item，index，self）参数列表
+set的应用
+两个数组的并，交，差
+const s = new Set(arr.concat(arr2));
+[...s]
+
+交集   
+    const s1 = new Set(arr1);
+    const s2 = new Set(arr2);
+    [...s1].filter(item => {
+        return s2.has(item);
+    })
+
+差集
+    选中A,B 两个中互相没有的东西
+    
+

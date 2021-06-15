@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+    <p>
+        <span>姓名 :</span><span id="name"></span>
+    </p>
+    <p>
+        <span>年龄 :</span><span id="age"></span>
+    </p>
+    <script>
+        const spanName = document.getElementById('name');
+        const spanAge = document.getElementById('age');
+        const user = {};
+        Object.defineProperty(user,"age",{
+            set(value){
+                spanAge.innerHTML = value;
+            },
+            get(){
+                return spanAge.innerHTML;
+            }
+        });
+        Object.defineProperty(user,"name",{
+            set(value){
+                spanName.innerHTML = value;
+            },
+            get(){
+                return spanName.innerHTML;
+            }
+        });
+        Object.defineProperty(user,"sex",{
+            set(value){
+                user._sex = value;
+            },
+            get(){
+                return user._sex;
+            }
+        });
+    </script>
+</body>
+</html>
