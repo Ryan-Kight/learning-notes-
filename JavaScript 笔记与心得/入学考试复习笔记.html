@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 0px;
+            height: 0px;
+            border-bottom: 100px solid red;
+            border-left: 100px solid blue;
+            border-right: 100px solid green;
+        }
+        /* #div1 {
+            width: 0px;
+            height: 0px;
+            border-top: 100px solid red;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 100px solid transparent;
+        }
+        div {
+            width: 0px;
+            height: 0px;
+            border-bottom: 100px solid red;
+            border-left: 100px solid transparent;
+        }
+        #div3 {
+            position: absolute;
+            margin-top: 20px;
+            width: 100px;
+            height: 100px;
+            border: 1px solid yellow;
+            background-color: red;
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+        #div4 {
+            text-align: center;
+            color: blue;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: #f40;
+            line-height: 50px;
+            height: 60px;
+            text-decoration: line-through;
+        }
+        #div3:hover{
+            background-color: blue;
+            margin-left: 100px;
+        } 
+
+        #div5 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            padding: 50px;
+            border: 50px solid blue;
+        
+        }
+
+        #div6 {
+            width: 100px;
+            height: 100px;
+            background-color: black;
+        } */
+
+        /* #fir {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            padding: 10px;
+        }
+        #sec{
+            width: 60px;
+            height: 60px;
+            background-color: green;
+            padding: 10px;
+        }
+        #third{
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            padding: 10px;
+        }
+        #for{
+            width: 20px;
+            height: 20px;
+            background-color: green;
+            padding: 10px;
+        }
+        #fif{
+            width: 20px;
+            height: 20px;
+            background-color: white;
+        } */
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+    
+        /* #pos1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            /* left: 100px; */
+            /* opacity: 0.5;
+            left: 50%;
+            top: 50%;
+            margin-left: -50px;
+            margin-top: -50px; */
+            /* z-index: 11;
+        }
+
+        #pos2{
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+            position: absolute;
+            z-index: 10;
+        } */ 
+
+        /* .right{
+            width: 300px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            left: 0;
+            opacity: 0.5;
+            
+        }
+        .left{
+            height: 50px;
+            width: auto;
+            background-color: blue;
+            /* position: absolute; */
+            /* left: auto; */
+            /* margin-left: 300px;
+        } */
+
+        #parent{
+            clear: both;
+        }
+        #f1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin-right: 30px;
+            float: left;
+            opacity: 0.5;
+        }
+        #f2{
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            
+        }
+
+       
+        
+    </style>
+</head>
+<body>
+    <!-- form表单是用来向后台提交用户输入的内容，交由后端去处理。
+         其中，action要发送给后台哪个对象的地址 。form可以理解为是一份调查问卷
+         当中要填许多内容，比如input下的文本，密码，单选，复选。select下拉菜单中的内容
+         所以这些东西在我写的时候都是要做出，选它会有什么值，这个值和给用户看到的是匹配的
+         所以用户点了哪个选项，写了哪些东西，我最后可以通过用户提交的方式最终得到。-->
+    <!-- <form action="#">
+        userName:<input type="text" name="userName"><br>
+        password:<input type="password" name="password"><br>
+        <input type="radio" name="sex" value="male">male
+        <input type="radio" name="sex" value="female">female <br>
+        <input type="submit">
+        <input type="checkbox" name="answer" value="A" checked>A
+        <input type="checkbox" name="answer" value="B">B
+        <input type="checkbox" name="answer" value="C">C
+        <input type="checkbox" name="answer" value="D">D
+        <br>
+        <select name="province">
+            <option value="北京">北京</option>
+            <option value="上海">上海</option>
+            <option value="天津">天津</option>
+            <option value="四川">四川</option>
+        </select>
+    </form> -->
+
+
+    <!-- 有关于border的一些操作 -->
+    <!-- 利用宽高为零，利用border的四个方向top left right bottom 可以绘制三角形
+         只要上下 配合着 左右 取其中的让水平和垂直方向抢空间 然后让一方有颜色 另一方为透明
+         就可以成功画出三角形 透明色：transparent！ -->
+    <!-- <div id="div1"></div>
+    <div id="div2"></div>
+    <div id="div3"></div> -->
+
+    <!-- 文字一般都是用标签包起来的，这样方便调文字的样式 -->
+    <!-- <div id="div4"><span>ryan is a handsome person</span></div> -->
+
+    <!-- 做一个盒子 让内容水平垂直居中
+         只要里面的和外面的宽高相等，然后让外面的盒子加上一层padding
+         就可以实现内容水平垂直居中 -->
+
+    <!-- <div id="div5">
+        <div id="div6"></div>
+    </div> -->
+    
+
+    <!-- 做一个远视图 -->
+    <!-- 技巧为：父元素的宽高是子元素的可视区，然后再加上一个padding就可以了
+                从最小的子元素开始做起。 -->
+    <!-- <div id="fir">
+        <div id="sec">
+            <div id="third">
+                <div id="for">
+                    <div id="fif"></div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- 层级定位 一般而言 子绝父相 -->
+    <!-- <div id="pos1"></div>
+    <div id="pos2"></div> -->
+
+    <!-- 两栏布局 -->
+    <!-- <div class="right"></div>
+    <div class="left"></div> -->
+
+    <!-- 浮动 -->
+    <!-- <div id="parent">
+        <div id="f1"></div>
+        <div id="f2"></div>
+    </div> -->
+    <div></div>
+
+    <script>
+        var oLi = document.getElementsByTagName('li');
+        for(var i = 0; i < oLi.length; i++){
+            (function(j){
+                oLi[j].addEventListener('click',function(){
+                    console.log(j);
+                },false)
+            }(i))
+        }
+    </script>
+</body>
+</html>

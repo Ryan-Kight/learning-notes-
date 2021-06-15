@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	//判断多少字节的操作
+	var test = window.prompt('input');
+	function check (text){
+		var length,
+			count;
+			length = count = text.length;
+		for(var i = 0; i < length; i++){
+				if(text.charCodeAt(i) > 255){
+					count++;
+				}
+		}
+		document.write(count);
+	}
+
+	check(test);
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		// json 可以理解为是一个对象{}
+		// 一个储存东西的容器
+		// 用JSON.stringify()的方法 把对象变为字符串的json格式
+		// 用JSON.parse()的方法 把字符串类型的json文件转化为js能够使用的对象模式
+
+		// domTree 
+		// 浏览器识别html代码 把html每个节点放到这么一个树形结构中去
+		// 符合深度优先原则（刨根）
+		// domTree 解析早于加载 
+		// domTree生成完后，等着cssTree ，然后domTree + cssTree = randerTree
+		// randerTree生成完之后，渲染引擎开始渲染
+
+		// dom节点的删除，添加。会引起randerTree的reflow（就是会使渲染树重排），页面重新绘制
+		// 		用了offsetWidth或者offsetHeight也会触发reflow （要避免）
+		// repaint 重绘 ，改变字体，颜色的时候会引起重绘
+
+		// 异步加载js三种方法
+		// 1.在引入js的时候 加上 defer=“defer” （等号后的defer可以省略）
+		// 	只有IE能用，在中间也可以添加代码，但是要等到整个dom文档解析完才能执行
+		// 2.在引入js的时候 加上 async=“async” （w3c标准 加载完就执行）async 全拼：asynchronous（异步）
+		// 3.创建script标签：var script = document.createElement('script');
+		// 				script.src = "xxx.js"; 在这里的时候就已经开始异步加载js文件了
+		// 				document.head.appendChild(script);
+		// 				script.onload = function(){...} 如果script下载完了，就会触发里面的事件
+		// 				IE: 
+		// 				script上有一个状态码属性 readyState 一开始 loading 加载完了会改成loaded
+		// 				script.onreadystatechange=function(){
+		// 					if(script.readyState == "complete" || "loaded"){
+		// 						test();
+		// 					}
+		// 				}
+		// 				按需加载：
+		// 				函数需要异步加载script时使用 function loadScript（1.url 2.callback）{
+		// 					test（）；
+		// 				}
+		// 				思想：先绑定事件，再做加载
+
+		// 				loadScript('demo.js',function(){test();})
+		// 				也可以传字符串evals（）；
+
+		// 时间线 加载时间线 浏览器刚出生 执行顺序
+		// 1.创建document对象，解析web页面，这阶段document.readyState = "loading"
+		// 2.遇到link 加载css
+		// 3.遇到script 无async,defer 发生阻塞
+		// 4.遇到外部js，有async，defer 开启异步 禁止document.write（）会清空文档流
+		// 5.遇到img解析，异步下载图片资源
+		// 6.domTree解析完，document.readyState = 'interactive'
+		// 7.解析完后，defer中的代码开始执行
+		// 8.doc对象触发Doccontextload 浏览器开始识别
+		// 9.async，img 都完毕后，document.readyState = "completed"。
+
+		// window.onload
+		// $(document).ready(function(){})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

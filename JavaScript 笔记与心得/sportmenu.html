@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+        ul{
+            list-style: none;
+            width: 800px;
+            height: 100px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-top: -300px;
+            margin-left: -400px;
+        }
+        .option{
+            width: 198px;
+            height: 98px;
+            border: 1px solid black;
+            background-color: #f40;
+            line-height: 98px;
+            text-align: center;
+            float: left;
+        }
+        .move{
+            position: absolute;
+            width: 200px;
+            height: 100px;
+            background-color: blue;
+            opacity: 0.4;
+            left: 0px;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li class="option">menu1</li>
+        <li class="option">menu2</li>
+        <li class="option">menu3</li>
+        <li class="option">menu4</li>
+        <li class="move"></li>
+    </ul>
+    <script>
+        var option = document.getElementsByClassName('option');
+        var move = document.getElementsByClassName('move')[0];
+        var time = null;
+        for(var i = 0; i < option.length ; i ++){
+            option[i].onmouseenter = function(){
+                addSpeed(move,this.offsetLeft);
+            }
+        }
+
+        function addSpeed (dom,target){
+           
+            clearInterval(time);
+            var onetimerun = 0;
+            var f = 0.8;
+            var a = 3;
+            time = setInterval(function(){
+                a = (target - dom.offsetLeft) / 5;
+                onetimerun += a;
+                onetimerun *= f;
+                if(Math.abs(onetimerun) < 1 && Math.abs(target - dom.offsetLeft) < 1 ){
+                    clearInterval(time);
+                    dom.style.left = target + "px";
+                }else{
+                    dom.style.left = dom.offsetLeft + onetimerun + "px";
+                }
+            },30);
+        }
+
+
+
+
+    </script>
+</body>
+</html>

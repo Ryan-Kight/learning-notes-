@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<script type="text/javascript">
+	
+	//反转字符串
+	function reverse() {
+		var num = window.prompt('input');
+		var str = "";
+		for(var i = num.length - 1; i >= 0; i--){
+			str += transfer(num[i]);
+		}
+		console.log(str);
+	}
+
+	//switch case 选择练习
+	function transfer(target) {
+		switch(target){
+			case "1":
+				return "壹";
+			case "2":
+				return "贰";
+			case "3":
+				return "叁";
+
+		}
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

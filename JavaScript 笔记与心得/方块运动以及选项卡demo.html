@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!-- <style type="text/css">
+		//这个style是加在选项卡任务上面的
+		/*.content{
+			display: none;
+			width: 200px;
+			height: 200px;
+			border: 2px solid red;
+		}
+		.active {
+			background-color: yellow;
+		}*/
+	</style> -->
+</head>
+<body>
+	<!-- <div></div>
+	<script type="text/javascript">
+		//DOM -> Document Object Model
+		//DOM 给了可以操作HTML和XML的标准接口
+		//DOM 里面给了一系列方法用来操作HTML与XML，通过改变HTML的行间样式，间接改变css
+		//document.getElementsByTagName(标签选择)[选中标签的类数组中的位置]，来选择选定了哪个标签
+		var div = document.getElementsByTagName('div')[0];
+		//标签.style.样式列表的方式来改变css 接收的是字符串类型
+		div.style.width = "100px";
+		div.style.height = "100px";
+		div.style.backgroundColor = 'red';
+		div.onclick = (function (){
+			var count = 1;
+			return function (){
+				if(count % 3 == 1){
+					this.style.backgroundColor = 'green';
+				}else if(count % 3 == 2){
+					this.style.backgroundColor = 'yellow';
+				}else{
+					this.style.backgroundColor = "red";
+				}
+				count++;
+			};
+		}())
+	</script> -->
+
+
+
+
+
+
+
+
+
+
+	<!-- 选项卡任务实现 -->
+
+	<!-- <div class="wrapper">
+		<button class="active">按钮一</button>
+		<button>按钮二</button>
+		<button>按钮三</button>
+		<div style="display: block;" class="content">ryan</div>
+		<div class="content">kight</div>
+		<div class="content">my god</div>
+	</div>
+	<script type="text/javascript">
+		var btn = document.getElementsByTagName('button');
+		var div = document.getElementsByClassName('content');
+		for(var i = 0; i < btn.length; i++){
+			//这边要用立刻执行函数和闭包，因为在函数赋予的时候，并没有执行，是等你点他的时候才执行的。
+			//而那个时候的i，已经是四了，所以用立刻执行函数解决这个i的赋值问题。
+			(function (n){
+				btn[n].onclick = function () { 
+				for(var j = 0; j < btn.length; j++){
+					btn[j].className = "";
+					div[j].style = "";
+				}
+				this.className = "active";
+				div[n].style = "display:block";
+			} 
+			}(i))
+		}
+
+
+	</script>
+ -->
+
+ 	<script type="text/javascript">
+ 		
+ 		//script页面里也是可以创建div的
+ 		var div = document.createElement('div');
+
+ 		//把script里面创建的标签放到body里面去
+ 		document.body.appendChild(div);
+ 		div.style.width = "100px";
+ 		div.style.height = "100px";
+ 		div.style.backgroundColor = "red";
+ 		div.style.position = "absolute";
+ 		div.style.top = "0";
+ 		div.style.left = "0";
+
+ 		//小块加速运动
+ 		// var speed = 1;
+ 		// //setInterval(function (){}, 100) 每隔后面数的毫秒运行一下函数
+ 		// var timer = setInterval(function (){
+ 		// 	speed += speed/7;
+ 		// 	div.style.left = parseInt(div.style.left) + speed + "px";
+ 		// 	div.style.top = parseInt(div.style.left) + speed + "px";
+ 		// 	if(parseInt(div.style.left) > 400){
+ 		// 		//将计时器关闭，停止函数运行
+ 		// 		clearInterval(timer);
+ 		// 	}
+ 		// }, 40);
+
+
+
+ 		//实现小块交互式运动(上下左右) 绑定监听器
+ 		document.onkeydown = function(e){
+ 			
+ 			switch(e.which){
+ 				case 38 : 
+ 					div.style.top = parseInt(div.style.top) - 10 + "px";
+ 					break;
+ 				case 40 :
+ 					div.style.top = parseInt(div.style.top) + 10 + "px";
+ 					break;
+ 				case 39 :
+ 					div.style.left = parseInt(div.style.left) + 10 + "px";
+ 					break;
+ 				case 37 :
+ 					div.style.left = parseInt(div.style.left) - 10 + "px";
+ 					break;
+
+ 			}
+ 		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 	</script>
+
+
+
+
+
+
+</body>
+</html>

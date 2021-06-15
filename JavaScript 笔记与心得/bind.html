@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<button id="btn">click</button>
+	<script type="text/javascript">
+		//bind
+		//什么是bind（） 就是改变 function.bind(xxx) function中的this指向为xxx
+
+
+
+
+		//单对象编程模式
+		// var list = {
+		// 	//init 作为主开启点 作为功能的入口
+		// 	init : function(){
+		// 		this.name = "list";
+		// 		//this 这边的this指向的是list这个对象
+		// 		this.dom = document.getElementById('btn');
+		// 		this.bindEvent();
+		// 	},
+		// 	bindEvent : function(){
+				
+		// 		//这边绑定事件的对象是dom 所以是谁点的showMessage呢？是dom，所以showMessage中的this指向了dom，那dom标签的本质是什么呢？是选中的button对象。但是我想获取的原意是打印出list中的name属性。这边就可以用到bind（）让函数方法不变，改变方法中的this指向为list对象
+
+		// 		this.dom.onclick = this.showMessage.bind(this);
+
+		// 		//.bind()改变了this指向后，返回的还是一个函数类型。
+		// 		// var demo = this.showMessage.bind(this);
+		// 		// this.dom.onclick = demo;
+		// 	},
+		// 	showMessage : function(){
+		// 		console.log(this.name);
+		// 	} 
+		// }
+
+		// list.init();
+
+
+		//这边传参的时候，会将已经穿进去的参数拼接到函数执行传参列表的前面
+		// var x = 10;
+		// var show =function(a,b){
+		// 	console.log(this.x,a,b);
+		// }
+		// show(1,2);
+		// var obj = {
+		// 	x : 20
+		// }
+		// var newShow = show.bind(obj);
+		// newShow(5,6);
+		// var list = {
+			
+		// 	init : function(){
+		// 		this.name = "list";
+			
+		// 		this.dom = document.getElementById('btn');
+		// 		this.bindEvent();
+		// 	},
+		// 	bindEvent : function(){
+				
+		// 		this.dom.onclick = this.showMessage.bind(this,"hello","world");
+		// 	},
+		// 	showMessage : function(str1,str2,e){
+		// 		console.log(this.name+" "+str1+" "+str2);
+		// 		console.log(e);
+		// 	} 
+		// }
+
+		// list.init();
+
+
+		// function a (a,b,c){
+
+		// }
+		// var obj ={}
+		// var x = 1,
+		// 	y = 2,
+		// 	z = 3;
+		// var b = a.bind(obj,x,y);
+		// b(z);
+		//总结：
+		// 1.函数a调用bind方法的时候，需要传递的参数obj 选择性传递xyz
+		// 2.返回函数b
+		// 3.函数b在执行的时候，具体功能实现，实际上还是用了a函数的方法，只不过编程的this指向变成了obj
+		// 4.函数b在执行的时候，传递的参数 会 拼接到 之前 选择性参数 的 后面。然后一并传递给a进行执行
+		// 5.当你以new的方式---new b（）b所返回的构造器，依然是a（），并且你传进去的obj不会起到任何作用
+
+		//自己封装一下bind函数（方法）
+		//Function.prototype 与Object.prototype 一般无二，也是从源头添加一点自定义的东西
+		// Function.prototype.mybind = function(target){
+		// 	//target的目的是：改变返回函数的this指向
+		// 	//这边的this指的是谁调用mybind的这个函数
+		// 	var self = this;
+		// 	//我们需要获取传参列表的第二位开始往后的所有参数，因为要拼接到b执行的时候的参数的前面
+		// 	//这边为什么要用[].splice.call（）的方法？ 因为arguments是类数组！没有splice方法！
+		// 	var args = [].splice.call(arguments,1);
+		// 	//我们为了保持new 新函数的时候 不改变其中的this 以及返回的构造器还是原函数
+		// 	//构建一个缓冲的构造函数
+		// 	var temp = function (){};
+		// 	var f = function(){
+		// 		//这个是新函数执行时传进来的参数
+		// 		var userArgs = [].slice.call(arguments,0)
+		// 		//真正执行的其实是self 为什么呢？ 因为你改变的是self中的this指向，但是方法还是self本身
+		// 		//这个函数用了self的方法为自己搭建了东西
+		// 		//，后面的是传到self里面的传参列表
+		// 		return self.apply(this instanceof temp ? this : (target || window),args.concat(userArgs));//instanceof 用法是前面是对象后面是构造函数
+		// 		//如何判断是否为new呢，new了的话，f的构造函数以及会和上面的self原型产生联系
+		// 	}
+		// 	//
+		// 	temp.prototype = self.prototype;
+		// 	f.prototype = new temp();
+		// 	return f;
+		// }
+
+
+		// var show = function(w,x,y,z){
+		// 	console.log(this,w,x,y,z);
+		// }
+		// var test = {}
+		// var newShow = show.mybind(test,1,2,3);
+		// //newShow(4);
+		// console.log(new newShow().constructor);
+
+
+
+
+
+
+
+		// 1.函数a调用bind方法的时候，需要传递的参数o 选择性传递xyz
+		// 2.返回函数b
+		// 3.函数b在执行的时候，具体功能实现，实际上还是用了a函数的方法，只不过编程的this指向变成了obj
+		// 4.函数b在执行的时候，传递的参数 会 拼接到 之前 选择性参数 的 后面。然后一并传递给a进行执行
+		// 5.当你以new的方式---new b（）b所返回的构造器，依然是a（），并且你传进去的obj不会起到任何作用
+
+		//第一遍独自封装bind
+		// Function.prototype.mybind = function(target){
+			
+		// 	var self = this;
+		// 	var temp = function(){}
+		// 	temp.prototype = self.prototype;
+		// 	var args = [].splice.call(arguments,1);
+		// 	var f = function(){
+		// 		var _args = [].splice.call(arguments,0);
+		// 		return self.apply(this instanceof temp ? this : (target || window),args.concat(_args));
+		// 	}
+		// 	f.prototype = new temp();
+		// 	return f;
+		// }	
+
+		// var x = 10;
+		// var show = function(){
+		// 	console.log(this.x);
+		// }
+		// var obj = {
+		// 	x : 100
+		// };
+
+		// var newShow = show.mybind(obj);
+		
+		// console.log(new newShow().constructor);
+
+
+		//第二遍独自封装bind
+
+		// Function.prototype.mybind = function(target){
+		// 	var self = this;
+		// 	var args = [].splice.call(arguments,1);
+		// 	var temp = function(){};
+		// 	temp.prototype = self.prototype;
+		// 	var f = function(){
+		// 		var _args = [].splice.call(arguments,0);
+		// 		return self.apply(this instanceof temp ? this : (target || window),args.concat(_args));
+		// 	}
+		// 	f.prototype = new temp();
+		// 	return f;
+
+		// }
+
+		// var x = 10;
+		// var show = function(){
+		// 	console.log (this.x);
+		// }
+		// var obj = {
+		// 	x : 100
+		// }
+		// var newShow = show.mybind(obj);
+		// newShow();
+
+
+		//单对象模式编程
+		var list = {
+			init : function(){
+				this.name = "ryan";
+				this.getButton();
+				this.button.onclick = this.getEvent.bind(this);
+			},
+		
+			getButton : function (){
+				this.button = document.getElementById('btn');
+			},
+			getEvent : function(){
+				console.log(this.name);
+			}
+		}
+		list.init();
+
+
+
+
+
+
+
+
+
+
+
+
+		
+
+
+
+	</script>
+</body>
+</html>

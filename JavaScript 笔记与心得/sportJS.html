@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        /* div {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 500px;
+            top: 0px;
+        }
+        button {
+            margin-top: 150px;
+        }
+        span {
+            position: absolute;
+            width: 1px;
+            height: 100px;
+            background-color: black;
+            left: 300px;
+            top: 0px;
+
+        } */
+        /* .wrapper {
+            width: 600px;
+            height: 80px;
+            background-color: orange;
+            position: absolute;
+            left: -600px;
+            top: 200px;
+        }
+        .wrapper span {
+            width: 50px;
+            height: 80px;
+            background-color: red;
+            position: absolute;
+            right: -50px;
+            top: 0px;
+        } */
+        div{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            opacity: 1;
+            top: 200px;
+        }
+        #sqr2{
+            position: absolute;
+            top: 350px;
+        }
+    </style>
+</head>
+<body>
+    <div id="sqr1"></div>
+    <div id="sqr2"></div>  
+    <script>
+        var oSqr1 = document.getElementById('sqr1');
+        var oSqr2 = document.getElementById('sqr2');
+
+        //获取标签当前属性值
+        function getStyle(dom,target){
+            if(window.getComputedStyle){
+                return window.getComputedStyle(dom,null)[target];
+            }else{
+                return dom.currentStyle[target];
+            }
+        }
+
+        //运动之后的变化到 width 300 height 300 top 275 left 500 opacity 50
+        //多物体多值运动 + 回调机制
+        function startMove(dom,targetObj,callback){
+            clearInterval(dom.time);
+            var currentStyle = null;
+            var changeSpeed = null;         
+            dom.time = setInterval(function(){
+                var flag = true;
+                for(var prop in targetObj){
+                    if(prop == "opacity"){
+                        currentStyle = parseFloat(getStyle(dom,prop)) * 100;
+                    }else{
+                        currentStyle = parseInt(getStyle(dom,prop));
+                    }
+                    changeSpeed = (targetObj[prop] - currentStyle) / 7;
+                    changeSpeed = changeSpeed > 0 ? Math.ceil(changeSpeed) : Math.floor(changeSpeed);
+                    if(prop == "opacity"){
+                        dom.style[prop] = (changeSpeed + currentStyle) / 100;
+                    }else{
+                        dom.style[prop] = changeSpeed + currentStyle + "px";
+                    }
+                    if(currentStyle != targetObj[prop]){
+                        flag = false;
+                    }
+                    
+                }
+                if(flag){
+                    clearInterval(dom.time);
+                    (typeof (callback) == "function") && callback();
+                }
+            },30);
+        }
+
+        oSqr1.onclick = function(){
+            startMove(this,{width : 300,height : 300,top : 275,left : 500,opacity : 50},function(){
+                startMove(oSqr2,{width : 300,height : 300,top : 275,left : 500,opacity : 50},function(){
+                    alert("over!");
+                })
+            });
+        }
+
+
+
+
+
+
+
+
+
+        // var obtn = document.getElementsByTagName('button')[0];
+        //var time = null;
+        // obtn.onclick = function(){
+        //     slowDown(odiv,300);
+        // }
+
+
+
+        //缓冲运动
+        // var odiv = document.getElementsByClassName('wrapper')[0];
+        // var time = null;
+        // odiv.onmouseover = function (){
+        //     slowDown(odiv,0);
+        // }
+        // odiv.onmouseout = function(){
+        //     slowDown(odiv,-600);
+        // }
+        // function slowDown(dom,target){
+        //     clearInterval(time);
+        //     var speed = null;
+        //     time = setInterval(function(){
+        //         speed = (target - dom.offsetLeft)/10;
+        //         speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+        //         //console.log(speed);
+        //         if(target == dom.offsetLeft){
+        //             clearInterval(time);
+        //             dom.style.left = target + "px";
+        //         }else{
+        //             dom.style.left = dom.offsetLeft + speed + "px";
+        //         }
+                
+        //     },30);
+        // }
+
+
+
+        //匀速运动
+        // function startMove(dom, target){
+        //     clearInterval(time);
+        //     var speed = target - dom.offsetLeft > 0 ? 7 : -7;
+        //     time = setInterval(function(){
+        //         if(Math.abs(target - dom.offsetLeft) < Math.abs(speed)){
+        //             clearInterval(time);
+        //             dom.style.left = target + "px";
+        //         }else{
+        //             dom.style.left = dom.offsetLeft+speed+"px";
+        //         }
+                
+        //     },30);
+        // }
+
+        
+
+        //透明度缓冲
+        // function slowOpacity(dom,target){
+        //     clearInterval(time);
+        //     var speed = null;
+        //     var curOpacity = null;
+        //     time = setInterval(function(){
+        //         curOpacity = parseFloat(getStyle(dom,"opacity")) * 100;
+        //         speed = (target * 100 - curOpacity) / 7;
+        //         speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+        //         if(target * 100 == curOpacity){
+        //             clearInterval(time);
+        //         }else{
+        //             dom.style.opacity = (curOpacity + speed) / 100;
+        //         }
+        //     },30);
+        // }
+        // odiv.onclick = function(){
+        //     slowOpacity(this,0.5);
+        // }
+
+        //多物体运动
+        // function linkageSport(dom,target){
+        //     clearInterval(dom.time);
+        //     var speed = null;
+        //     var curWidth = null;
+        //     dom.time = setInterval(function(){
+        //         curWidth = parseInt(getStyle(dom,'width'));
+        //         speed = (target - curWidth) / 7;
+        //         speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+        //         if(target == curWidth){
+        //             clearInterval(dom.time);
+        //         }else{
+        //             dom.style.width = curWidth + speed + "px";
+        //         }
+        //     },30)
+        // }
+        // for(var i = 0; i < odiv.length; i++){
+        //     odiv[i].onmouseenter = function(){
+        //         linkageSport(this,400);
+        //     }
+        //     odiv[i].onmouseleave = function(){
+        //         linkageSport(this,100);
+        //     }
+        // }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	//命名空间 开发的时候变量名很有可能重复，导致冲突，怎么解决这个问题呢？
+	//十年前的做法
+	// var org ={
+	// 	department1 : {
+	// 		ryan : {
+	// 			name : "ryan",
+	// 			age : 18,
+	// 			sex : 'male'
+	// 		},
+	// 		ryan1 : {
+	// 			name : "ryan1",
+	// 			age : 12,
+	// 			sex : 'male'
+	// 		}
+	// 	},
+	// 	department2 : {
+	// 		kight : {
+	// 			name : "kight",
+	// 			age : 18,
+	// 			sex : 'male'
+	// 		},
+	// 		kight1 : {
+	// 			name : "kight1",
+	// 			age : 12,
+	// 			sex : 'male'
+	// 		}
+	// 	}
+	// }
+	// var ryan = org.department1.ryan;
+	// var ryan1 = org.department1.ryan1;
+	// var kight = org.department2.kight;
+	// var kight1 = org.department2.kight1;
+
+	//目前所能用的做法为 闭包
+	var biBao = (function (){
+		var name = "Ryan-Kight";
+		function tellName(){
+			console.log(name);
+		}
+		return function(){
+			tellName();
+		}
+	}())
+
+	//未来能用于解决命名空间问题的应该是 webpack 
+
+
+
+
+
+	//如何实现jQurry 连续调用？
+	//当函数没有返回值的时候，默认的返回值是undefined
+	//改变返回值为this的时候，执行完函数，返回对象本身，即可以进行连续调用
+	var myJQurry ={
+		smoke : function (){
+			console.log("somking is cool!");
+			return this;
+		},
+		drink : function(){
+			console.log("drinking is cool ,i like drinking");
+			return this;
+		},
+		perm : function(who){
+			this.who = who;
+			console.log(this.who + " like perming");
+			return this;
+		}
+	}
+	
+
+	//属性的表示方法
+	//系统内部，在执行类似于 test.a 的时候会 隐式编译成 test["a"] 的形式
+	// var test = {
+	// 	a : "a",
+	// 	b : "b",
+	// 	c : "c",
+	// 	num : 1,
+	// 	text : "我"
+	// }
+	//如何遍历对象？
+	//for - in 遍历
+	// for(var prop in test){
+	// 	console.log(prop + " " + typeof(prop));
+	// }
+	//遍历展示为：
+	// a    string
+	// b    string
+	// c    string
+	// num  string
+	// text string
+	//思考为什么后者的类型都是统一的呢？
+	//原因：因为在对象.属性的时候，隐式转化为了 对象.[“属性”]，
+	//     所以prop其实是string类型的
+	//那么将属性值遍历出来就有办法了
+	// for(var prop in test){
+	// 	console.log(prop + " : " + test[prop]);
+	// }
+
+	//我们现在将对象放在原型链之中
+	var obj = {
+		name : "test继承了obj"
+	}
+	//我们在Object.prototype 中也加入自己定义的东西，查看是否是自己定义的都能追溯到
+	Object.prototype.testMine = "源头定义";
+
+	var test = {
+		a : "a",
+		b : "b",
+		c : "c",
+		num : 1,
+		text : "我",
+		__proto__ : obj
+	}
+	//再遍历一遍test中的属性
+	for(var prop in test){
+		console.log(prop + " : " + test[prop]);
+	}
+	//结果为：
+	// a : a
+    // b : b
+    // c : c
+    // num : 1
+    // text : 我
+	// name : test继承了obj
+	// testMine : 源头定义
+    //结论：用 for - in 遍历对象属性的时候
+    //会追溯原型链上的内容。只要原型链中有自己设置的内容都能访问到，只有系统定义的访问不到。
+
+    //为了只遍历自己的属性
+    // for - in 变式 
+    //用 hasOwnProperty() 判断是否为自己的属性
+    for(var prop in test){
+    	if(test.hasOwnProperty(prop)){
+			console.log(prop + " : " + test[prop]);
+		}
+	}
+
+
+
+
+
+
+
+	//instanceof
+	//A instanceof B
+	//含义是：A对象的原型链上有没有B构造函数的原型
+	console.log( [] instanceof Object);   // true
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+	</title>
+</head>
+<body>
+	<script type="text/javascript">
+		
+		//如何实现javascript继承？ 圣杯模式
+		// var inherit = (function (){
+		// 	var F = function(){}
+		// 	return function (target,origin){
+		// 		F.prototype = origin.prototype;
+		// 		target.prototype = new F();
+		// 		target.prototype.constructor = target;
+		// 		target.prototype.uber = origin.prototype;
+		// 	}
+		// }())
+		// A.prototype.name = "大家继承的原型空间";
+		// function A (){}
+		// function B (){}
+		// inherit(B,A);
+		// var a = new A();
+		// var b = new B();
+
+
+
+
+
+		//一个字符串[a-z]组，请找出该字符串第一个只出现一次的字母
+
+		function findOnce(unproduct){
+			var len = unproduct.length;
+			var arr = [];
+			var result = null;
+			
+			for(var i = 0; i < len; i++){
+				var flag = 0;
+				for(var j = i + 1 ; j < len; j++){
+					if(unproduct[i] == unproduct[j]){
+						flag = 1;
+						break;
+					}
+				}
+				if(flag == 0){
+					arr.push(unproduct[i]);
+					result = "ok";
+					break;
+				}
+			}
+			if(result){
+				return arr[0];
+			}else{
+				return result+"";
+			}
+		}
+		
+	
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+
+</body>
+</html>

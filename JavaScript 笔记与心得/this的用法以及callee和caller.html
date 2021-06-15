@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	// “,”逗号操作符
+	//var a = (1,2);
+	//逗号操作符必须带有括号，返回逗号后面的内容
+
+
+
+
+
+	//undefined == null  结果为:true
+	//undefined === null 结果为:false
+	//NaN 与 NaN 狠得连自己都不认识
+
+
+
+
+
+	// this 的用法
+	//1.函数预编译过程中 this 指向 window
+	// var a = 1;
+	// function test (){
+	// 	var a = 2;
+	// 	console.log(this.a);
+	// }
+	// test();//打印结果为1
+	// new test();//打印结果为undefined
+	//原因：在new构造函数的时候，会在第一行隐式的 var this = Object.creat(test.prototype);
+	//	   构造出来了一个 this 对象 访问this对象中的a ，所以是undefined
+
+	//2.全局里的this指向window
+	//var a = 1;
+	//console.log(this.a);//打印的是1
+
+	//3.call/apply 改变this指向，传参列表不同。 
+
+	//4.obj.function() 对象里面有函数，谁调用谁就是this。
+	
+	//总结：把this 和 函数看的简单一点，就分为无主和有主两个状态，无主状态下指向window ，有主状态下指向主人。
+	//没人.函数，其实就是无主，直接走预编译。
+
+
+
+
+
+
+	//arguments.callee 指代函数名， 指代函数自己
+	//运用场景，立刻执行函数下有递归的时候
+	// var a = (function(n){
+	// 	if(n == 1){
+	// 		return 1;
+	// 	}
+	// 	return n * arguments.callee(n-1);
+	// }(4));
+
+
+	//函数.caller 由这个知道是哪个函数用了自己。
+	// function test(){
+	// 	demo();
+	// }
+	// function demo(){
+	// 	console.log(demo.caller);
+	// }
+	
+
+
+
+
+
+
+</script>
+</body>
+</html>

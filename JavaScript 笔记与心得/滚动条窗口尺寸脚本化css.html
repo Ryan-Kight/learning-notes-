@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	
+
+</head>
+<body>
+	<div style="width: 100px;height: 100px;background-color: red;"></div>
+	<script type="text/javascript">
+		//查看滚动条的滚动距离：
+		//window.pageXOffset / window.pageYOffset  IE8以下不兼容
+		//		横向滚动距离 / 竖向滚动距离
+		//document.body / document.documentElement .scrollLeft / scrollTop
+		//兼容性比较混乱，用的时候去两个值相加，因为两个值不可能同时存在
+
+		//封装 兼容性方法 用来查看 滚动条的滚动距离 放入自己的工具库中
+		// function getScrollOffset(){
+		// 	if(window.pageYOffset){
+		// 		return{
+		// 			x : window.pageXOffset,
+		// 			y : window.pageYOffsey
+		// 		}
+		// 	}else{
+		// 		return{
+		// 			x : document.documentElement.scrollLeft + document.body.scrollLeft,
+		// 			y : document.documentElement.scrollTop + document.body.scrollTop 
+		// 		}
+		// 	}
+		// }
+
+
+
+
+
+		//查看可视化窗口的尺寸
+		//window.innerWidth / innerHeight    IE8及以下不兼容
+		//document.documentElement.clientWidth / clientHeight 标准模式下，任意浏览器兼容
+		//document.body.clientWidth / .clientHeight 适用于怪异模式下的浏览器
+
+		//浏览器有两种渲染模式 标准模式和怪异模式 怪异模式启用方法为删除置顶的doctype，启动后可以向下兼容
+		//document.compatModel查看兼容模式。BackCompat 向后兼容
+		//封装查看视口尺寸
+		// function getViewportOffset(){
+		// 	if(window.innerWidth){
+		// 		return {
+		// 			width : window.innerWidth,
+		// 			height : window.innerHeight
+		// 		}
+		// 	}else if(document.compatModel == "BackCompat"){
+		// 		return{
+		// 			width : document.body.clientWidth,
+		// 			height : document.body.clientHeight
+		// 		}
+		// 	}else{
+		// 		return{
+		// 			width : document.documentElement.clientWidth,
+		// 			height : document.documentElement.clientHeight
+		// 		}
+		// 	}
+		// }
+
+
+
+
+		//查看元素的几何尺寸（视觉尺寸）
+		//（dom元素）.getBoundingClientRect(); 兼容性好
+		//求元素的width  dom元素.offsetWidth（） 视觉尺寸
+		//求元素的height dom元素.offsetHeight（） 
+
+
+		//查看元素位置 （求的是相对于父级的位置 忽略自身）
+		//div.offsetLeft	返回的是数值，可读
+		//div.offsetTop
+		//div.offsetParent 返回有定位的父级
+
+
+
+		//让滚动条滚动
+		//window上有三个方法
+		//scroll（）scrollTo（x，y） 让滚动条滚动到x或y的位置距离
+		//scrollBy（x，y） 让滚动条累加滚动多少距离
+
+
+
+
+
+
+		//脚本化css
+		//可读可写
+		//dom元素.style  获得dom元素所有css行间样式表的一个类数组
+		//dom元素.style.width = "200px"; 必须是字符串形式 ， 改变的是行间样式表
+		//只能获得行间有的样式，不能获得外部css或者页面级css
+		//碰到保留字float 写cssFloat
+
+
+		//查询计算后的样式  IE8及以下不兼容
+		//window.getComputedStyle(想获取的那个dom元素,null) -->返回样式表形式的类数组
+		//只读 当前元素所有css的显示值
+		//改变null。可以查看该元素的伪元素
+
+		//IE8 用的获取方法是：dom元素.currentStyle
+
+		//封装一下，获取方法
+		// function getStyle(elem,prop){
+		// 	if(window.getComputedStyle){
+		// 		return window.getComputedStyle(elem,null)[prop];
+		// 	}else{
+		// 		return elem.currentStyle[prop];
+		// 	}
+		// }
+
+
+		//通过dom元素.className 的方式可以直接改变dom元素中，class属性的值
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

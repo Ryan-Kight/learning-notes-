@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+	</title>
+</head>
+<body>
+	<script type="text/javascript">
+		
+		// function test() {
+		// 	var fruit = "";
+		// 	var person = {
+		// 		eat : function (){
+		// 			console.log('i am eating '+fruit);
+		// 		},
+		// 		push : function (myfruit){
+		// 			fruit = myfruit;
+		// 		}
+		// 	}	
+		// 	return person;
+		// }
+
+		// var person1 = test();
+		// person1.push('banana');
+		// person1.eat();
+
+
+
+		//闭包+立刻执行函数
+		// function test(){
+		// 	var arr = [];
+		// 	for(var i = 0; i < 10; i++){
+		// 		(function (j){
+		// 			arr[j] = function a (){
+		// 			document.write(j + " ");
+		// 		}
+		// 		}(i))
+		// 	}
+		// 	return arr;
+		// }
+
+		// var myarr = test();
+		// for(var i = 0; i < 10; i++){
+		// 	myarr[i]();
+		// }
+
+		//闭包+立刻执行函数
+		//思维拓展：其实改变闭包，就是新建一个房子。从那个房子里面拿东西，（将他的作用域链顶端添加仓库）
+		// function test(){
+		// 	var arr = [];
+		// 	for(var i = 0; i < 10; i++){
+
+		// 		function a(j){
+		// 			arr[j] = function a (){
+		// 			document.write(j + " ");
+		// 			}
+		// 		}
+		// 		a(i);
+
+		// 	}
+		// 	return arr;
+		// }
+
+		// var myarr = test();
+		// for(var i = 0; i < 10; i++){
+		// 	myarr[i]();
+		// }
+
+
+		function test(){
+			var arr = [];
+			for(var i = 0; i < 10; i++){
+				(function(j){
+					arr[j] = function(){
+						document.write(j + " ");
+					}
+				}(i))
+			}
+			return arr;
+		}
+
+		var myarr = test();
+		for(var i = 0; i < 10; i++){
+			myarr[i]();
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+
+</body>
+</html>

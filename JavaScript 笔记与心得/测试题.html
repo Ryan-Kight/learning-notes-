@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	//false 隐式调用Number（），false --> 0
+	var str = false + 1;
+	document.write(str);
+	var demo = false == 1;
+	document.write(demo); 
+
+	//typeof(a) --> undefined,返回值是字符串类型。
+	//+  - 隐式调用Number（） --> NAN； 但是最后有一个拼接字符串，所以全变成字符串了。所以隐式调用Boolean时，还是true； 
+	if(typeof(a) && - true + (+undefined) + ""){
+		document.write("done");
+	}
+
+	//11*2 隐式调用Number（）
+	if(11 + "11" * 2 == 33){
+		document.write("done");
+	}
+
+	//  空串 隐式调用Boolean（）--> false
+	!!" " + !!"" - !!false || document.write("do?");
+
+	//未经申明的变量只有放入typeof中才不会报错 返回结果是字符串类型的undefined，能被执行符号 执行的 函数 忽略！函数名！！
+	var x = 1;
+	if(function f(){}){
+		x += typeof(f);
+	}
+	console.log(x);
+
+	//隐式调用了包装类 new String（‘abcd’）.length = 2 ；delete
+	var str = "abcd";
+	str.length = 2;
+	console.log(str);
+	
+	//undefined 
+	//abc1 --> "string" --> 隐式调用包装类 new String（“string”）添加sign属性，然后delete
+	var str = "abc" ;
+	str += 1;
+	var test = typeof(str);
+	if(test.length == 6){
+		test.sign = "do?"
+	}
+	console.log(test.sign);
+
+	//求x,y,z 
+	//未对x进行赋值运算
+	//函数申明提升，后面的覆盖前面的
+	//y = 1 + 3
+	//z = 1 + 3
+	var x = 1, y = z = 0;
+	function add(n){
+		return n = n + 1;
+	}
+	y = add(x);
+	function add(n){
+		return n = n + 3;
+	}
+	z = add(x);
+
+	//求输出结果
+	function Car (){
+		this.name = "我是构造函数里的name";
+		return {
+			name : "我是return的name"
+		};
+		//已经return了，所以隐式的return没有实现
+	}
+	var myCar = new Car();
+	console.log(myCar.name);
+
+
+	//控制台打印结果
+	var name = "222";
+ 	var a = {
+  		name : "111",
+ 		say : function () {
+      			console.log(this.name);
+       		}
+ 	}
+ 	var fun = a.say;
+ 	fun();									//222
+ 	a.say();								//111
+	var b = {
+		name : "333",
+		say : function (fun) {
+				fun();
+			}
+	}
+	b.say(a.say);							//222
+	b.say = a.say;
+	b.say();								//333
+
+
+
+	// var foo = '123';
+	// function print(){
+	// 	var foo = '456';
+	// 	this.foo = '789';
+	// 	console.log(foo);
+	// }
+
+	var foo = 123;
+	function print(){
+		this.foo = 234;
+		console.log(foo);
+	}
+
+	//求返回值
+	"10" > "9";
+	undefined == null;
+	NaN == NaN;
+	[]  == [];
+	
+	//用正则去连续重复
+	var reg = /(\w)\1+/g;
+	var testDemo = "aaabbbcccdddeeeffaa";
+	testDemo.replace(reg,"$1");
+
+
+	
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		//try catch
+		//总结：在try里面发生了错误，不会执行错误后的代码，执行catch里面的代码，
+		//	   然后接着执行try-catch后的代码
+
+		//Error.name的六种值对应的信息
+		// 1.EvalError : eval()的使用与定义不一致
+		// 2.RangeError : 数值越界
+		// 3.ReferenceError : 非法或不能识别的引用数值 （未经申明就调用）
+		// 4.SyntaxError : 发生语法解析问题 （低级错误，类似于中文分号）
+		// 5.TypeError : 操作数类型错误
+		// 6.URIError : URI处理函数使用不当
+
+
+
+
+
+
+
+
+		//ES5.0 严格模式
+		// "use strict"; 启用es5.0  可全局置顶使用，可局部置顶使用 用字符串的形式使用向后兼容。
+
+		//禁用 with(){} 在es3.0中可以改变作用域链
+		//			   增拓了命名空间的使用，但是消耗了浏览器太多的内核，执行效率慢。
+		// var obj = {
+		// 	name : "ryan"
+		// }
+		// var a = function (){
+		// 	var name = "stack";
+		// 	with(obj){
+		// 		console.log(name);
+		// 	}
+		// }
+
+		//禁用 arguments.callee ,函数.caller（）以及'arguments' property
+
+		//变量必须经过申明才能赋值
+
+		//预编译中 this 不再指向window 全局
+
+		//拒绝重复属性和参数
+
+		//禁用eval（） 在eval中能把字符串当代码使用。
+		//禁忌：es3.0都不能使用eval（）； eval是魔鬼
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

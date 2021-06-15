@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+
+		// 计算2的n次幂
+		// var a = parseInt(window.prompt('input1'));
+		// var result = 1;
+		// for(var i = 0; i < a;i++){
+		// 	result *= 2;
+		// }
+		// document.write(result);
+
+		//计算n的阶乘
+		// for(var i =1; i <= a; i++){
+		// 	result = result * i;
+		// }
+		// document.write(result);
+
+		//输入3个数字，找最大的；
+		// var b = parseInt(window.prompt('input2'));
+		// var c = parseInt(window.prompt('input3'));
+		// a < b && (a = b);
+		// a < c && (a = c);
+		// document.write(a); 
+
+		//斐波那契数列
+		// var f = 1,
+		// 	s = 1,
+		// 	t;
+		// for(var i = 0; i < a - 2; i++){
+		// 	t = f + s;
+		// 	f = s;
+		// 	s = t;
+		// }
+		// document.write(t);
+
+		//寻找100以内的质数
+
+		
+		// for(var i = 2; i <= 100; i++){
+		// 	var flag = 0;
+		// 	for(var j = 2; j <= Math.sqrt(i); j++){
+		// 		if((i % j) == 0){
+		// 			flag = 1;
+		// 		}
+		// 	}
+		// 	if(flag == 0){
+		// 		document.write(i + " ");
+		// 	}
+		// }
+
+		//递归经典案例1--阶乘
+		// var target = parseInt(window.prompt('input'));
+		// function factorial (n){
+		// 	if(n == 1){
+		// 		return 1;
+		// 	}
+		// 	return n * factorial(n-1);
+		// }
+		// document.write(factorial(target));
+
+		//递归经典案例2--斐波那契数列
+		var target = parseInt(window.prompt('input'));
+		function fibonacci (n){
+			if((n == 1) || (n == 2)){
+				return 1;
+			}
+			return (fibonacci(n - 1) + fibonacci(n - 2));
+		}
+		document.write(fibonacci(target));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

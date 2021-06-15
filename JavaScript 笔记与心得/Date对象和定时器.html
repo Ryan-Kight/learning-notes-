@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+	</title>
+</head>
+<body>
+	<!-- <input name="count" value="0"> -->
+	<script type="text/javascript">
+		// Date对象 日期对象 是系统提供好的
+		// var date = new Date(); //创建一个Date对象
+		// 获得值
+		// date.getDate(); 	   //返回今天是一个月中的第几天
+		// date.getDay();		   //返回今天是周几 从0开始（0-6）
+		// date.getMonth();	   //返回月份 但是从0开始 （0-11）
+		// date.getHours();	   //返回现在是第几个小时
+		// date.getMinutes();	   //返回现在是多少分
+		// date.getSeconds();	   //返回现在是多少秒
+		// date.getFullYear();	   //返回现在是几几年
+		// date.getTime();		   //获得从1970年1月1日至今的毫秒数 1970.1.1是计算机元年
+
+		// 设置值
+		// date.setDate(); 	   //设置今天是一个月中的第几天
+		// date.setMonth();	   //设置月份 但是从0开始 （0-11）
+		// date.setHours();	   //设置现在是第几个小时
+		// date.setMinutes();	   //设置现在是多少分
+		// date.setSeconds();	   //设置现在是多少秒
+		// date.setFullYear();	   //设置现在是几几年
+
+		//定时器之浅层抢鞋机制
+		// var date = new Date();
+		// date.setHours(15,18,0,0);
+		// var timer = setInterval(function(){
+		// 	if(new Date().getTime() - date.getTime() > 10){
+		// 		console.log("我是第一个抢到鞋的男人！")
+		// 		clearInterval(timer);
+		// 	}
+		// },10);
+
+		//setInterval(function(){},毫秒); 每个多少毫秒，执行一次
+		//setInterval定时器是不准的
+		//setInterval是window上的方法
+		//每一个setInterval（）会返回一个数值作为唯一标示
+		//clearInterval();可以清空定时器
+
+		//setTimeout(function(){},毫秒) 等待多少毫秒后再执行。
+		//clearTimeout(); 清空等待器
+		//都是window上的方法，内部this 指向window
+
+		//setInterval("。。。",毫秒)； “” 里面当JS 代码用
+
+
+		//input 标签里面自带着value属性，可以直接更改值
+		// var input = document.getElementsByTagName('input')[0];
+		// input.value = 2;
+
+
+
+
+
+	</script>
+</body>
+</html>

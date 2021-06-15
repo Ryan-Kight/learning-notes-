@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		
+	</style>
+</head>
+<body>
+	<!-- <div style="width: 100px;
+	height: 100px;
+	background-color: red;
+	position: absolute;
+	left: 0;
+	top: 0;"></div> -->
+	<!-- <input type = "text" value="请输入关键字" onfocus="if(this.value=='请输入关键字'){this.value=''}" onblur="if(this.value==''){this.value='请输入关键字'}"> -->
+	<script type="text/javascript">
+
+		//拖拽小方块demo 还需要封装一个拖拽的方法
+		// var div = document.getElementsByTagName('div')[0];
+		// div.onmousedown = function(e){
+		// 	var disX = 0;
+		// 	var disY = 0;
+		// 	disX = e.pageX - parseInt(div.style.left);
+		// 	disY = e.pageY - parseInt(div.style.top);
+		// 	document.onmousemove = function(e){
+		// 		var event = e || window.event;
+				
+		// 		div.style.left = e.pageX  - disX + "px";
+		// 		div.style.top = e.pageY - disY + "px";
+		// 	}
+		// }
+		// div.onmouseup = function(){
+		// 	document.onmousemove = null;
+		// }
+		
+
+
+		//事件
+		// dom元素.onclick = function(){} 被点击后，执行函数 这种也称为句柄型，可以在行间添加
+		// 如何绑定事件
+		// on + 事件类型
+		// 选中的dom元素.addEventListener(事件类型 click，处理函数fn(){}，false);IE9及以下不兼容
+		// 可以为一个事件类型绑定多个处理函数。两个处理函数的地址要不一样。
+		// 选中的dom元素.attachEvent("on"+事件类型 onclick，处理函数fn(){}); 只有IE可以运行
+		// 绑定事件，要是用到for循环中的变量时，要注意闭包问题
+		// 事件处理 程序的运行环境
+		// 1.ele.on(xxx) = function(){} 函数中的this是指向dom元素本身
+		// 2.ele.addEventListener(事件类型，执行函数，false)；函数中的this指向dom元素本身
+		// 3.ele.attachEvent("on"+事件类型，执行函数)；函数的this指向window
+
+		//封装事件处理函数
+		// function addEvent(ele,type,fn){
+		// 	if(ele.addEventListener){
+		// 		ele.addEventListener(type,fn,false);
+		// 	}else if(ele.attachEvent){
+		// 		ele.attachEvent("on"+type,function(){
+		// 			fn.call(ele);
+		// 		});
+		// 	}else{
+		// 		ele['on'+type]= fn;
+		// 	}
+		// }
+
+		//解除事件绑定
+		// domELe.onclick = null;
+		// domEle.removeEventListerner(事件类型，执行函数，false)；
+		// domEle.detachEvent（“on”+事件类型，执行函数）；匿名函数无法解除绑定
+
+		//事件处理模型
+		// 事件冒泡： 结构上嵌套的父子元素，同一事件，自子元素开始向父元素冒泡。 （非视觉上，是结构上）
+		//			点击了最小的子元素，先执行完了子元素绑定的事件，然后向上依次执行父元素的事件。
+		//			即便子元素没有绑定事件，也会向上执行父元素的事件。
+
+		// 事件捕获： 同一事件，自父元素向子元素进行捕获。如何开启捕获呢？
+		//           将addEventListerner的 false --> true
+		//			若捕获和冒泡同时存在，先捕获后冒泡，不算上自身执行.
+
+		//取消冒泡
+		// e.stopPropagation(); IE9及以下不兼容
+		// e.cancelBubble = true;
+		//封装一个取消冒泡的方法stopBubble（）；
+		// function stopBubble(e){
+		// 	if(e.stopPropagation){
+		// 		e.stopPropagation();
+		// 	 }else{
+		// 		e.cancelBubble = true;
+		// 	}
+		// }
+
+
+		//阻止默认事件
+		//默认事件 -- 表单提交 a 标签跳转 右键出菜单
+		// 如果是句柄绑定事件的时候可以用 return false； 就是只有在onclick这样的绑定形式上好使
+		// 接收的e.preventDefault(); IE9及以下不兼容
+		// 接收的e.returnValue = false; 兼容IE
+		// 封装 阻止默认事件
+		// function cancelHandler(e){
+		// 	if(e.preventDefault){
+		// 		e.preventDefault;
+		// 	}else{
+		// 		e.returnValue = false;
+		// 	}
+		// }
+
+		//取消a标签 默认点击跳转置顶事件 
+		//可以在行间href中写 javascript：void（false）
+
+
+
+
+
+		//事件对象 --- 上有个属性 ---- 叫做事件源对象 ----到底在哪里触发的事件源头
+		//通过 e.target (火狐）或者 e.srcElement (IE)  Chrome都有
+
+		//事件委托：
+		//利用事件冒泡和事件源对象进行处理
+		//利用事件冒泡，首先用e.target找到事件源对象，然后对事件源对象进行一系列操作。
+		//优点： 1 性能，不需要循环所有的元素一个个绑定
+		//		2 灵活，当有新的子元素时不需要重新绑定事件
+
+
+
+		//事件分类
+		// 鼠标事件
+		// click mousedown mouseup mouseover = mouseenter mouseout = mouseleave
+		// 点击   鼠标按下   鼠标抬起  		鼠标移入   			鼠标移出
+		// contextmenu
+		// 右键出菜单
+		// 用e.button区分鼠标左右键 mousedown / mouseup 0为左键 1为滚轮 2为右键
+		// document.onmousedown = function(e){
+		// 	if(e.button == 0){
+		// 		console.log('左键');
+		// 	}else{
+		// 		console.log('右键');
+		// 	}
+		// }
+
+		//键盘事件类型 
+		// keydown keyup keypress
+		//  按下    抬起    按到
+		// keydown > keypress > keyup
+		// keydown能监测到所有键
+		// keypress能监测到ASCII码里面的按键，字符类按键
+		// document.onkeypress = function(e){
+		// 	console.log(String.fromCharCode(e.charCode));
+		// }
+
+		//文本类操作事件类型
+		// input 但凡有里面有变化都会触发input事件
+		// var input = document.getElementsByTagName('input')[0];
+		// input.oninput = function(){
+		// 	console.log(this.value);
+		// }
+
+		//change 聚焦，失去焦点两个状态，状态前后发生改变就触发
+		// var input = document.getElementsByTagName('input')[0];
+		// input.onchange = function(){
+		// 	console.log(this.value);
+		// }
+
+		//focus 聚焦 点上去的一瞬间触发
+		//blur 失去焦点 点出来的一瞬间触发
+		// var input = document.getElementsByTagName('input')[0];
+		// input.value = "请输入文字";
+		// input.onfocus = function(){
+		// 	if(this.value == "请输入文字"){
+		// 		this.value = "";
+		// 	}
+		// };
+		// input.onblur = function(){
+		// 	if(this.value == ""){
+		// 		this.value = "请输入文字";
+		// 	}
+		// };
+		//正规是写在行间
+		//<input type = "text" value="请输入关键字" onfocus="if(this.value=='请输入关键字'){this.value=''}" onblur="if(this.value==''){this.value='请输入关键字'}">
+
+		//窗体上事件类型
+		//scroll window.scroll
+		//load   window.onload --> 整个页面所有已经准备就绪的时候，才执行函数。
+		// window.onload = function(){
+		// 	var div = document.getElementsByTagName('div')[0];
+		// 	div.style.width = "100px";
+		// 	div.style.height = "100px";
+		// 	div.style.backgroundColor = "red";
+		// }
+		//         dom树                     css树
+		//        domTree                   cssTree
+		//                 renderTree（渲染树）
+		//       document
+		//        html
+		//  head         body
+		//           div      span
+		//     strong    em
+
+
+
+
+
+
+
+
+		
+
+
+
+
+
+	</script>
+
+</body>
+</html>

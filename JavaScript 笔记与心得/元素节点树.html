@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div id="only" class="classWay">
+		<span>
+			<strong>
+				<div class="demo"></div>
+			</strong>
+		</span>
+	</div>
+	<script type="text/javascript">
+		
+		//document 意旨整个文档 html之上
+		//DOM开始 系统提供的都是类数组形式
+		//标签选择方法
+		//document.getElementById('only');通过id的形式选择标签
+		//document.getElementsByTagName('div')[0];通过标签名的方式选择
+		//document.getElementsByClassName('classWay')[0];通过类名进行选择 但是i8以下没设该方法
+		//document.getElementsByName('') 通过name进行选择 （常用于表单 img iframe）
+		//var div = document.querySelector('div span strong .demo'); 类似于css的选择器方法
+		//document.querySelectorAll('') 选一组
+		//document.querySelector()document.querySelectorAll() 是非实效性的，选的是div的副本静态的
+
+
+
+		//遍历节点树  
+		//parentNode   父节点
+		//childNode    子节点们
+		//firstChild   第一个子节点
+		//lastChild    最后一个子节点
+		//nextSibling  下一个兄弟节点
+		//previousSibling 前一个兄弟节点
+
+		//      节点类型       nodeType的返回值
+		//      元素节点   ---      1
+		//      属性节点   ---      2
+		//      文本节点   ---      3
+		//      注释节点   ---      8
+		//     document   ---      9
+		// DocumentFragment  ---   11
+
+
+		//基于元素节点树的遍历    （IE9及以下不兼容）
+		//元素节点其实就是直接能选中标签的意思
+		//parentElement             父元素节点
+		//children                  子元素节点  （唯一兼容的）
+		//firstElementChild         第一个子元素节点
+		//lastElementChild		    最后一个子元素节点
+		//nextElementSibling	    下一个兄弟元素节点
+		//previousElementSibling    上一个兄弟元素节点
+
+
+
+		//节点的四个属性
+		// nodeName 元素的标签名 
+		// nodeValue （文本节点，注释节点拥有） 返回文本中的内容 可读可写
+		//nodeType    返回值为该节点的类型所对应的数字
+		//attributes  返回该节点下的id，name，class这样的附加集合
+		//节点有一个方法： hasChildNodes()    判断是否有子节点
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

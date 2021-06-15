@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	//数组
+	//两种常规创建数组形式
+	// var a = [];
+	// var a = new Array();
+	//所有数组的方法都来源于Array.prototype
+	// 与 var a = [10] 不同 var a = new Array(10) 创建了一个长度为10的数组
+	// 所以如果 var a = new Array(10.2) 就会报错
+
+	//JavaScript 数组读写基本上不会报错，除非引用了不存在的方法
+
+
+
+
+
+
+
+
+	//数组 Array.prototype 里的方法
+	//第一大类，会改变原数组的：
+
+	//1.push() 在数组最后一位添加数据 添加多少位都可以 手动封装一下
+	// Array.prototype.mypush = function (){
+	// 	for(var i = 0; i < arguments.length; i++){
+	// 		this[this.length] = arguments[i];
+	// 	}
+	// }
+
+	//2.pop() 在数组的最后一位删除数据，返回值为删除数据
+
+	//3.unshift() 在数组最前面添加数据
+
+	//4.shift() 删除数组最前面的数据
+
+	//5.reverse() 反转数组
+
+	//6.splice() 用法splice（从第几位开始截取，到底几位结束截取，在截取的位置填入新的数据）
+	// 		     返回值是截取的那段数据 如果splice（从第几位开始截取）没说停，就截取到最后
+
+	//7.sort() 帮我们进行数组排序 默认排序规则是用ASCII排的
+	//		   我们可以传给sort（）我们自己定义的一个比较规则 在（）里面传函数，系统用的时候会自己调
+	//		   传进去函数的定义规则如下:
+	//				1.必须定义两个参数。
+	//				2.比较规则是：如果函数返回值是负数，传进来的参数对应数组中的位置不变
+	//							如果函数返回值是正数，传进来的参数对应数组中的位置交换
+	//							如果函数返回值为 0 ，位置也不发生改变
+
+	// var a = [4,3,8,24,57,32,56,21,5,6];
+	// a.sort(function (x,y){
+	// 	return x - y; //升序  原因：如果x>y ,就返回正数，使前后位置发生变化（小的在前大的在后）
+	// 				  //		  如果x<y ,就返回负数，是前后位置不发生变化（小的本来就在前面）
+	// 				  //		  而此时，两者都返回 x-y 即可。 
+	// });			  //降序 原因同理可得。即只需 return y - x;
+
+	// 将一个有序数组乱序
+	// var a = [1,2,3,4,5,6,7,8,9];
+	// a.sort(function(x,y){
+	// 	return Math.random() - 0.5; 
+	// });
+
+
+
+
+
+
+
+
+	//第二大类：不改变原数组 （此时就应该关注返回值）
+
+	//1.concat() 进行数组拼接。 
+	//	e.g: var a = [1],b = [2]; var c = a.concat(b);c = [1,2]
+
+	//2.toString() 将数组变成字符串 
+	//e.g: var a = [1,2,'a']; a.toString(); 返回值为：“1,2,a”;
+
+	//3.slice() 用法 slice(从第几位开始截取，截取到第几位) 不改变原数组！！！ 返回值为截取内容
+
+	//4.join() 用法join("必于是字符串类型")或者不填，不填是自动加逗号进行数组之间的隔开。
+	//var a = [1,2,3,4,5]; 返回值为："1,2,3,4,5" 返回值类型：string
+
+
+
+
+
+
+
+	//类数组 (属性名要以数字为索引，必须要有length属性，最好加上push)
+	// var a = {
+	// 	0 : "a",
+	// 	1 : "b",
+	// 	2 : "c",
+	// 	length : 3,
+	// 	push : Array.prototype.push,
+	//	splice : Array.prototype.splice     //加入这个属性后，将会完全的变成数组形式
+	// }
+
+	//类数组的内部 push原理
+	// Array.prototype.push = function(){
+	// 	for(var i = 0; i < arguments.length; i ++){
+	// 		this[this.length] = arguments[i];
+	// 		length ++;
+	// 	}
+	// }
+
+
+
+
+
+	//封装一个方法实现数组去重
+	Array.prototype.deduplicate = function (){
+		var result = [],
+			obj = {},
+			len = this.length;
+		for(var i = 0; i < len; i++){
+			if(!obj[this[i]]){
+				obj[this[i]] = "已经出现过啦";
+				result.push(this[i]);//要往空数组中增加东西，用push方法！
+			}
+		}
+		return result;
+	}
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

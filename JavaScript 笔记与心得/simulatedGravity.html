@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        var div = document.getElementsByTagName('div')[0];
+
+        //绑定定点下落物体，模拟重力场。
+        // div.onclick = function(){
+        //     console.log("a");
+        //     simulatedGravity(this);
+        // };
+        // function simulatedGravity(dom){
+        //     clearInterval(dom.timer);
+        //     var speedX = 6;
+        //     var speedY = 8;
+        //     var newTop = null;
+        //     var newLeft = null;
+        //     var a = 4;
+        //     var f = 0.8;
+        //     dom.timer = setInterval(function(){
+        //         speedY += a;
+        //         newTop = dom.offsetTop + speedY;
+        //         newLeft = dom.offsetLeft + speedX;
+        //         if(newTop >= document.documentElement.clientHeight - dom.clientHeight){
+        //             newTop = document.documentElement.clientHeight - dom.clientHeight;
+        //             speedY *= -1;
+        //             speedY *= f;
+        //             speedX *= f;
+        //         }
+        //         if(newTop <= 0){
+        //             newTop = 0;
+        //             speedY *= -1;
+        //             speedY *= f;
+        //             speedX *= f;
+        //         }
+        //         if(newLeft >= document.documentElement.clientWidth - dom.clientWidth){
+        //             newLeft = document.documentElement.clientWidth - dom.clientWidth;
+        //             speedX *= -1;
+        //             speedY *= f;
+        //             speedX *= f;
+        //         }
+        //         if(newLeft <= 0){
+        //             newLeft = 0;
+        //             speedX *= -1;
+        //             speedY *= f;
+        //             speedX *= f;
+        //         }
+                
+        //         if(Math.abs(speedY) < 1 && Math.abs(speedX) < 1 && newTop == document.documentElement.clientHeight - dom.clientHeight){
+        //             clearInterval(dom.timer);
+        //             console.log("over");
+        //         }else{
+        //             dom.style.top = newTop + "px";
+        //             dom.style.left = newLeft + "px";
+        //             console.log(newLeft,newTop);
+        //         }
+                
+        //     },30);
+        // }
+
+
+
+        //拖拽+重力模拟
+        div.onmousedown = function(e){
+            clearInterval(this.timer);
+            //需要实时获取页面数据的时候，需要形参e，那么就需要做浏览器兼容
+            var event = event || e;
+            //要让目标跟随着鼠标移动的时候，首先需要获取鼠标在目标物体内部的距离
+            var disX = event.clientX - this.offsetLeft;
+            var disY = event.clientY - this.offsetTop;
+            var self = this;
+            var lastX = 0;
+            var lastY = 0;
+            var speedX = 0;
+            var speedY = 0;
+            document.onmousemove = function(e){
+                var event = event || e;
+                //鼠标在屏幕中的位置，减去之前得到的在目标物体内的距离。
+                var newTop = event.clientY - disY;
+                var newLeft = event.clientX - disX;
+                speedX = newLeft - lastX;
+                speedY = newTop - lastY;
+                lastX = newLeft;
+                lastY = newTop;
+
+                //查看以下如何判断鼠标移动快慢
+                // var ospan = document.createElement('span');
+                // ospan.style.position = 'absolute';
+                // ospan.style.left = newLeft + "px";
+                // ospan.style.top = newTop + "px";
+                // ospan.style.width = "5px";
+                // ospan.style.height = "5px";
+                // ospan.style.backgroundColor = "black";
+                // document.body.appendChild(ospan);
+
+                //为这个距离实时更替style属性，便能视觉上有运动效果。
+                self.style.left = newLeft + "px";
+                self.style.top = newTop + "px";
+            }
+
+            document.onmouseup = function(){
+                //当鼠标抬起的时候，清空鼠标移动和抬起事件。
+                simulatedGravity(self,speedX,speedY);
+                document.onmousemove = null;
+                document.onmouseup = null;
+            }
+        }
+
+        function simulatedGravity(dom,speedX,speedY){
+            clearInterval(dom.timer);
+            var newTop = null;
+            var newLeft = null;
+            var a = 4;
+            var f = 0.8;
+            dom.timer = setInterval(function(){
+                speedY += a;
+                newTop = dom.offsetTop + speedY;
+                newLeft = dom.offsetLeft + speedX;
+                if(newTop >= document.documentElement.clientHeight - dom.clientHeight){
+                    newTop = document.documentElement.clientHeight - dom.clientHeight;
+                    speedY *= -1;
+                    speedY *= f;
+                    speedX *= f;
+                }
+                if(newTop <= 0){
+                    newTop = 0;
+                    speedY *= -1;
+                    speedY *= f;
+                    speedX *= f;
+                }
+                if(newLeft >= document.documentElement.clientWidth - dom.clientWidth){
+                    newLeft = document.documentElement.clientWidth - dom.clientWidth;
+                    speedX *= -1;
+                    speedY *= f;
+                    speedX *= f;
+                }
+                if(newLeft <= 0){
+                    newLeft = 0;
+                    speedX *= -1;
+                    speedY *= f;
+                    speedX *= f;
+                }
+                
+                if(Math.abs(speedY) < 1 && Math.abs(speedX) < 1 && newTop == document.documentElement.clientHeight - dom.clientHeight){
+                    clearInterval(dom.timer);
+                    console.log("over");
+                }else{
+                    dom.style.top = newTop + "px";
+                    dom.style.left = newLeft + "px";
+                    
+                }
+                
+            },30);
+        }
+    </script>
+</body>
+</html>

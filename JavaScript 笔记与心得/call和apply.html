@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	//call 和 apply 篇
+	//call 
+	//定义的构造函数其实也是函数，用函数.call（对象，加参数）的方式来为对象自己增加属性或方法。
+	//简单的说：（对象）借用别人的函数来实现自己的功能
+	function Person(name,age){
+		this.name = name;
+		this.age = age;
+	}
+	var person1 = new Person("ryan",18);
+	var person2 = {}
+	Person.call(        person2         , "zcy" ,  19 );
+	//           改变了Person中this的指向		对应的参数
+	//其实就是在Person构造函数中隐式的将var this = {} 改成了 var person2 = {}
+	//所以this都变成了person2，最后再隐式的将 return this 改成了 person2 
+
+	//一般情况下，构造函数（构造工厂）发现有另一个构造函数（构造工厂）能被自己覆盖 使用call
+	//借用别人的“工厂”为自己“制造东西”
+	//勿忘call
+	// function SmallCar(size,color,height,width){
+	// 	this.size = size;
+	// 	this.color = color;
+	// 	this.height = height;
+	// 	this.width = width;
+	// }
+
+	// function BigCar(size,color,height,width,seat,wheel){
+	// 	SmallCar.call(this,size,color,height,width);
+	// 	this.seat = seat;
+	// 	this.wheel = wheel;
+	// }
+
+	// var bigCar = new BigCar(2000,"red",200,100,"comfortable","white");
+
+	//apply篇
+	//函数.apply(对象，[参数列表])
+	//call和apply都改变this指向，但是传参列表不同
+
+	function SmallCar(size,color,height,width){
+		this.size = size;
+		this.color = color;
+		this.height = height;
+		this.width = width;
+	}
+
+	function BigCar(size,color,height,width,seat,wheel){
+		SmallCar.apply(this,[size,color,height,width]);
+		this.seat = seat;
+		this.wheel = wheel;
+	}
+
+	var bigCar = new BigCar(2000,"red",200,100,"comfortable","white");
+
+
+	//用call的方式来查看未知变量是什么类型的
+	//用Object.prototype中有个toString方法
+	var arr = [];
+	var obj = {}
+	var num = 123;
+	console.log(Object.prototype.toString.call(arr));
+	console.log(Object.prototype.toString.call(obj));
+	console.log(Object.prototype.toString.call(num));
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

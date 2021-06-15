@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	//浅层克隆
+	//如果有引用数据类型更改，会连带把被克隆的属性也进行更改。
+	// var a = {
+	// 	name : 'ryan',
+	// 	age : 19,
+	// 	sex : 'male',
+	// 	score : 100,
+	// 	arr : [1,2,3,4,5]
+	// }
+	// function clone (origin){
+	// 	var newObj = {}
+	// 	for(var prop in a){
+	// 		newObj[prop]= a[prop];
+
+	// 	}
+	// 	return newObj;
+	// }
+	// var b = clone(a);
+
+
+	//深层克隆
+	//解决引用类型数据更改问题
+	//判断是不是原始值
+	//判断是数组还是对象 toString instanceof constructor
+	//Object.prototype.toString.call([])
+	//建立相对应的数组或对象
+	var a = {
+		name : 'ryan',
+		age : 19,
+		sex : 'male',
+		score : 100,
+		arr : [1,2,3,4,5],
+		obj : {
+			name : "obj",
+			age : 20
+		}
+	}
+	
+	function clone (origin , target){
+		var target = target || {},
+			checkArr = Object.prototype.toString,
+			arrStr = "[object Array]";
+		for(var prop in origin){
+			if(origin.hasOwnProperty(prop)){
+				if (typeof(origin[prop]) == "object") {
+					if(checkArr.call(origin[prop]) == arrStr){
+						target[prop] = [];
+					}else{
+						target[prop] = {};
+					}
+					clone(origin[prop],target[prop]);
+				}else{
+					target[prop] = origin[prop];
+				}
+			}
+		}
+		return target;
+	}
+
+	var b = clone(a);
+
+
+
+
+</script>
+</body>
+</html>

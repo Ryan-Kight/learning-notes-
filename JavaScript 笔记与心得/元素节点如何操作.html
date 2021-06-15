@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<!-- 通过 document.body .head 的形式可以直接选中body或者head标签 -->
+	<!-- 通过 document.documentElement 的形式可以直接选中html标签 -->
+
+
+	<!-- 在javascript 当中进行增删改换操作-->
+	<!-- 上次笔记入了如何选中标签 -->
+	<span>123</span>
+	<script type="text/javascript">
+		//如何在javascript当中创建了一个一个标签（元素节点）
+		//var div = document.createElement('div');//在javascript当中创建了一个div
+
+		//如何给元素增加内容
+		//div.innerHTML = "输入在div标签里的";//innerHTML 给div这个标签里面写东西，用等号会有覆盖效果
+
+		//如何将创造的标签（元素节点）放置在html中
+		//document.body.appendChild(div);// 在父级标签内放入div标签，放置标签到html里面
+
+		//如何为创建的或者选中的标签（元素节点）增加行间样式
+		//div.setAttribute('style','width:200px;height:24px;background-color:red;color:#fff;')
+		//可以用setAttribute（）的方法为标签增加行间属性。加样式，可按照css行间样式的形式
+
+		//如何为自己的行间样式增添属性
+		// div.setAttribute('count','1');//也可以增加自己想要的属性，属性名不固定规格
+
+		//如何插入在一个元素之前
+		//div.setAttribute('class','demo');//增加行间属性class ，后面赋值
+		//  var span = document.getElementsByTagName('span')[0];
+		// document.body.insertBefore(span,div);
+		//父级元素.insertBefore(A,B)父级元素用insertBefore方法是A插入在B的前面
+
+		//如何删除元素
+		 //document.body.removeChild(span); //父级元素删除自己的子元素，有返回值（谋杀）
+		 //div.remove(); //元素自己删除自己，无返回值（自杀）
+
+		//如何替换元素
+		//document.body.replaceChild(div,span); //父级元素将第一个（new）把第二个替换掉（origin）
+
+		//如何得到自己的行间属性的值
+		// console.log(div.getAttribute("style")); //元素得到自己的行间属性值
+		// console.log(div.getAttribute("class"));
+
+		//查看点击数
+		// div.onclick = function(){		//实现这个功能的计数属性随点击次数的增加而增加
+		// 	count = div.getAttribute("count");
+		// 	count++;
+		// 	div.setAttribute('count',count+'')
+		// 	console.log(count);
+		// }
+
+
+
+
+
+
+	</script>
+</body>
+</html>
+
+
+
+

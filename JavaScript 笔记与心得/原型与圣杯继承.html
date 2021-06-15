@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	//原型 是 构造函数.prototype
+	//只有构造函数有原型 对象可以作为构造函数的原型，以此来形成原型链。
+	//constructor 是原型内部自带的构造器。 访问是可以更改的，无实际效果，只是访问的时候会告诉你你是哪个构造函数生成的
+	// function ConstructorA (){}
+	// function ConstructorB (){}
+	// var a = new ConstructorA();
+	// ConstructorA.prototype.constructor = ConstructorB; 
+	//更改构造器，是构造函数.prototype
+
+
+
+
+	//__proto__ 原型连接器，是在创建对象的时候，在隐式this中有一个自带的属性，告诉函数他的原型是谁
+	//只有对象有__proto__ 原型连接器
+	//xxx.__proto__ = ... 的形式可以更换原型
+	// Car.prototype.size = 100;
+	// function Car(){}
+	// Van.prototype.size = 200;
+	// function Van(){}
+	// var car = new Car();
+	// car.__proto__ = Van.prototype;
+	//更改原型连接器，是 对象.__proto__ 进行更改 
+	//原因是只有在对象创建的时候才会出现 __proto__ = 原型指向 （xxx.prototype）
+	//Car.__proto__ 出现的是 
+	//ƒ () { [native code] }
+	//native code本地代码，是区别于虚拟机上运行的代码而言的。
+	//而所谓的native code会直接编译成可运行的机器语言进行运行
+
+
+
+
+	//继承模式1 -- 原型链
+	//原型其实可以理解为一个对象，父子继承，可以理解为，拴了一条链子，可以向父辈拿取属性或方法
+	// Grand.prototype.name = "Ryan-Kight";
+	// function Grand(){}
+	// var grand = new Grand();
+	// Father.prototype = grand;
+	// function Father (){}
+	// var father = new Father();
+	// Son.prototype = father;
+	// function Son(){}
+	// var son = new Son();
+
+
+
+
+	//继承模式2 -- 共享模式
+	//缺点：不能为单一后代改变原型。只能两个构造工厂一起改变
+	// Person1.prototype.name = "person";
+	// function Person1(){}
+	// Person2.prototype = Person1.prototype;
+	// function Person2(){}
+	// person1 = new Person1();
+	// person2 = new Person2();
+	//将上述代码，封装成函数
+	// Person1.prototype.name = "person";
+	// function Person1(){}
+	// function Person2(){}
+	// function inherit(Target,Origin){
+	// 	Target.prototype = Origin.prototype;
+	// }
+	// inherit(Person2,Person1);
+	// person1 = new Person1();
+	// person2 = new Person2();
+
+
+
+
+
+	//继承模式3 -- 圣杯模式 （yahoo版）
+	//可以为后代的原型增加新的属性或方法，另一个构造工厂不会发生改变。方法：加入了一个中间层
+	// Person1.prototype.name = "person";
+	// var inherit = (function (){
+	// 	var F = function (){};
+	// 	return function (Target,Origin){
+	// 		F.prototype = Origin.prototype;
+	// 		Target.prototype = new F();
+	// 		Target.prototype.constructor = Target;
+	// 		Target.prototype.uber = Origin.prototype;
+	// 	}
+	// }())
+	// function Person1(){}
+	// function Person2(){}
+	// inherit(Person2,Person1);
+	// var person1 = new Person1();
+	// var person2 = new Person2();
+
+
+	//复习的时候 又封装了一下Yahoo版的圣杯模式	
+	var inherit = (function(){
+		var middle = function(){};
+		return function(Origin,Target){
+			middle.prototype = Origin.prototype;
+			Target.prototype = new middle();
+			Target.prototype.constructor = Target;
+			Target.prototype.uber = Origin.prototype;
+		}
+	}());
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
