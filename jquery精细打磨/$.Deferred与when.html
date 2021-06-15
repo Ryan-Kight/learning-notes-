@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <script src="jquery.js"></script> -->
+    <script src="myJquery.js"></script>
+    <script>
+        // var df = $.Deferred();
+        //$.Deferred() 创建出了一个deferred对象。底层原理其实就是$.Callbacks()
+        //创建出来的对象身上有done，fail，progress方法，往三个不同的状态上添加处理函数
+        //猜测：与callbacks中的add相似，也可以一次性绑定多个。
+        //用done注册的函数，用resolve()触发
+        //用fail注册的函数，用reject()触发
+        //用progress注册的函数，用notify()触发
+        //resolve reject notify 和callbacks中的fire相似都是用来触发绑定函数的，并且可以为绑定的函数传参
+        //done fail progress 都是用$.Callbacks()注册的。progress用$Callbacks('memory')注册;
+        //其中 done 和 fail 底层都是用$.Callbacks('once memory')注册的，
+        //若是执行了resolve或者reject其中一个，就会改变触不触发这个状态，再执行时，判断状态，所以只能执行一次。
+        //创建出来的deferred对象身上有个方法叫promise() 返回出来的是只能注册函数的deferred对象
+        //为了防止外界对回调机制中函数的主动触发 
+        //我们可以 创建一个 函数 返回 阉割版deferred对象 用$.Deferred().promise()返回出去
+        //$.Deferred()对象身上的then()方法，是解决回调地狱的核心。
+        //因为$.ajax()返回的是阉割过的$.Deferred()对象，ajax中的success，可以返回出去，用then注册
+        //$.when()方法可以往当中传很多个类似与ajax的延迟对象，然后.then()只要when当中有一个没有成功，就执行reject（）
+        
+        
+
+
+
+        // df.done(function(){
+        //     console.log('done');
+        // });
+        // function fail(){
+        //     console.log('fail');
+        // }
+        // df.notify();
+        // df.fail(fail);
+        // df.progress(function(){
+        //     console.log('我可以被多次执行');
+        // })
+
+        // function cutDeffered(){
+        //     var cutDf = $.Deferred();
+        //     // cutDf.resolve();
+        //     cutDf.reject('有什么好传的！');
+        //     return cutDf.promise();
+        // }
+        // var cutDf = cutDeffered();
+        // console.log('a');
+        // cutDf.done(function(){
+        //     console.log('我的resolve方法不行了呜呜呜');
+        // });
+        // cutDf.fail(function(ms){
+        //     console.log('你传啥？' + ms)
+        // });
+        // console.log('a');
+        // cutDf.fail(function(ms){
+        //     console.log('我又传了一遍' + ms)
+        // });
+        
+        // df.then(function (){
+        //     console.log('done');
+        //     var cutDf = $.Deferred();
+        //     setInterval(function(){
+        //         cutDf.resolve()
+        //     },1000);
+        //     return cutDf.promise();
+        // },function (){
+        //     console.log('fail');
+        //     return 'fail';
+        // },function (){
+        //     console.log('progress');
+        // }).then(function(){
+        //     console.log('cutDf');
+        //     var cutDf2 = $.Deferred();
+        //     setInterval(function(){
+        //         cutDf2.resolve()
+        //     },1000);           
+        //     return cutDf2.promise;
+        // },function(ms){
+        //     console.log(ms);
+        // }).then(function(){
+        //     console.log('cutDf2');
+        // })
+
+        // var myDf = $.myDeferred();
+        // myDf.done(function(){
+        //     console.log('a');
+        // })
+
+        var f = (
+            function a (){
+                return "1";
+            },
+            function g(){
+                return 2;
+            }
+        )();
+    </script>
+</body>
+</html>

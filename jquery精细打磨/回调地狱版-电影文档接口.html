@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .wrapper{
+            width: 600px;
+            border: 2px solid black;
+            margin: 100px auto;
+            overflow: hidden;
+        }
+        .tpl{
+            display: none;
+        }
+        .movieSection img{
+            width: 100%;
+            height: 150px;
+            cursor: pointer;
+        }
+        .movieSection{
+            float: left;
+            width: 180px;
+            height: 180px;
+            margin: 10px;
+            
+        }
+        .movieSection h3{
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="tpl">
+            <img src="" alt="">
+            <h3></h3>
+        </div>
+    </div>
+    <script src="jquery.js"></script>
+    <script>
+        $.ajax({
+            url : 'https://open.duyiedu.com/jq/movie/power',
+            type : 'POST',
+            data : {
+                username : 'cst',
+                password : '123123'
+            },
+            success : function(res){
+                if(res.data.power == 'root'){
+                    $.ajax({
+                        url : 'https://open.duyiedu.com/jq/movie/movieList',
+                        type : 'GET',
+                        success : function(res){
+                            var data = res.data;
+                            var $wrapper = $('.wrapper');
+                            $.each(data,function(index,ele){
+                                var $movieSection = $('.tpl').clone().removeClass('tpl').addClass('movieSection');
+                                $movieSection.data({id : ele.id})
+                                    .children()
+                                        .eq(0)
+                                            .attr('src',ele.poster)
+                                                .next().text(ele.name);
+                                $movieSection.on('click',function(){
+                                    $('.showMs').css({display : 'none'});
+                                    $.ajax({
+                                        url : 'https://open.duyiedu.com/jq/movie/movieInfo',
+                                        type : 'GET',
+                                        data : {
+                                            movieId : $(this).data('id')
+                                        },
+                                        success : function(res){
+                                            var data = res.data;
+                                            var direct = data.direct;
+                                            var gut = data.gut;
+                                            var mainActor = data.mainActor;
+                                            var screenWriter = data.screenwritter;
+                                            
+                                            var htmlStr = '<div class="showMs">\
+                                                    <p>导演:'+ direct +'</p>\
+                                                    <p>剧情:'+ gut +'</p>\
+                                                    <p>主演:'+ mainActor.reduce(function(preVal,curVal){
+                                                        preVal += curVal + " ";
+                                                        return preVal;
+                                                    },'') +'</p>\
+                                                    <p>编剧:'+ screenWriter.reduce(function(preVal,curVal){
+                                                        preVal += curVal + " ";
+                                                        return preVal;
+                                                    },'') +'</p>\
+                                                </div>';
+                                            $(htmlStr).appendTo('body').css({position : 'absolute',top : 100,left : 10,width : 400 })
+
+                                        }
+                                    })
+                                });
+                                $wrapper.append($movieSection);                        
+                            });
+
+                        }
+                    });
+                }else{
+                    console.log('You are not VIP!');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

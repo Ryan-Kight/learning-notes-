@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="jquery.js"></script>
+    <script>
+        
+        // $.Callbacks() 相当是一个构造工厂 需要创建出来 
+        // 然后通过add方法将函数添加进去，用fire方法执行
+        // 当中可以传参数 'once' 'memory' 'unique' 'stopOnFalse'
+        // 'once'只能fire一次，fire一次后fired中的false会改为true，猜测若fired返回值为true，则fire无法执行
+        // 'memory' 缓存上一次fire时的参数值，当add()添加回调函数时，直接用上一次的参数值立刻调用新加入的回调函数（拥有记忆功能）
+        // 'memory' 到底怎么运作的？是在fire执行的时候，执行已经注册的函数，
+        //  若有参数就保留,若后面有注册函数，注册后，拿上次的fire传入的参数立即执行。
+        // 'unique' 对添加到callback对象中的函数进行去重处理
+        // 'stopOnFalse' 在执行callback对象中函数时，若是遇到返回值为false的将停止执行后续函数
+        // 要是让callback对象拥有多种特性，可以 一起写
+        // 在fire的时候可以为callback中的函数传递参数。函数谁需要参数，传给谁。
+        // cb.add([a,b]);//两种在add中的传参方式。
+        var cb =  $.Callbacks('memory'); 
+        function a (x,y){
+            console.log('a',x,y);
+        }
+        function b (){
+            console.log('b');
+            return false;
+        }
+        cb.add(a,b);
+        cb.fire(2,3);
+
+        cb.fire(1,2);
+        console.log(2);
+        function c (x,c){
+            console.log('c',x,c);
+        }
+        cb.add(c);
+        
+
+
+
+    </script>
+</body>
+</html>

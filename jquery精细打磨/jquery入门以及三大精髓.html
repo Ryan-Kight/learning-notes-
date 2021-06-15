@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery.js"></script>
+</head>
+<body>
+    <div class="demo">
+        <span>123</span>
+    </div>
+    <div class="demo">
+        <p>p</p>
+    </div>
+    <div class="demo">
+        <span>456</span>
+    </div>
+    <script>
+        // $("div").css({width : "100px",height : "100px",backgroundColor : "red"});
+        // css()方法中用对象包裹想修改的数据，可以直接填数值，默认单位“px”，也可以用字符串的形式
+
+        //jquery 选择器
+        // $("div ul li:first").css({width:100,height:100,backgroundColor:"red" });
+        // 可以通过 odd（奇数） 和 even（偶数），通过来选中dom元素
+        // $("div ul li:eq(1)").css({width:100,height:100,backgroundColor:"red" });
+        //可以通过 eq（）的方式，去选中几号位置
+
+        //jquery特有选择器
+        // $("li[data ^= 'ryan']").css({width:100,height:100,backgroundColor:"red" });
+        //三种方式： 首先选中一类元素，然后在选中元素后面直接加上【。。】，可以理解他为筛选器
+        //          当中填上 你自己拥有的独特属性，类似于我们自己添加上去的属性，
+        //          然后 = ^= $= != 全等 以此开头 以此结尾 不等
+
+
+        //jquery拥有容错机制 即便$（）内填 undefined或null或“”也不会报错，会返回一个juery对象
+        //          容错机制 也很方便的容错了 筛选过程中要是没有值，结果是个null 可以继续操作
+        
+        //jquery 可以包装原生dom 使dom原生对象 --> jquery对象
+
+        //jquery 还可以包装函数
+        //$(function(){}); 当DOM加载完毕后，执行当中代码。 可以理解为：绑定了一个事件。
+        //是$(document).ready(function(){})的简写。
+
+        //在$（）中可以加入两个参数
+        //$(想要选的dom,在这个dom下面的);
+
+        //jquery 的 精髓 ： 选择元素 链式调用 循环操作
+        //由此打开jquery源码编写。
+
+        // console.log($(".demo"));
+        // $(".demo")
+        //     .css({width:"100px",height:"100px",backgroundColor:"blue"})
+        //         .css({backgroundColor:"red"});
+        // var colorArr = ["red","blue","orange"];
+        // $(".demo")
+        //     .find("span")
+        //         .each(function(index,ele){
+        //             $(this).css({color:colorArr[index]});
+        //         })
+            
+
+    </script>
+</body>
+</html>

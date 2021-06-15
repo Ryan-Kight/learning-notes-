@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="demo" style="width: 100px;height: 100px;background-color: red;position: absolute;"></div>
+    <script src="jquery.js"></script>
+    <script>
+        // console.log($.type(function(){}));
+
+        // $.type() 判断括号中的内容是什么东西，是他真的是什么东西，不像typeof 只判断类型
+        // $.isArray()
+        // $isFunction()
+        // $isWindow()
+
+        // $.trim() 去字符串首尾空格
+
+        // $.proxy() 改变this指向
+        // $.proxy(function(){},obj) 使选中的函数中的this指向我们传给的对象
+        // var list = {
+        //     init : function(){
+        //         this.ms = 123;
+        //         this.dom = $('.demo');
+        //         this.bindEvent();
+        //     },
+
+        //     bindEvent : function(){
+        //         this.dom.on('click',$.proxy(this.showMs,this));
+        //     },
+
+        //     showMs : function(){
+        //         console.log(this.produceMs());
+        //     },
+
+        //     produceMs : function(){
+        //         return this.ms + 123;
+        //     }
+        // }
+        // list.init();
+
+        //$.noConflict() 防止 $ 这个名字与其他 变量名发生冲突， 可以进行更改。
+        // $ryan = $.noConflict();
+        // $ryan('.demo').css({backgroundColor : 'blue'});
+
+        //$.each()  用于数组，类数组，对象的循环操作 将其中的每一个拿出来做些事
+        //          其中传参的时候是（index，ele）。
+        // es5 才有的forEach ，还是用forEach好用
+        // var a = [1,2,3,4];
+        // $.each(a,function(index, ele){
+        //     console.log(ele);
+        // });
+        
+        //$.map() 用于改变数组，类数组，对象这一类键值对的操作。
+        //        通过返回出去的值，从而改变每个元素的对应值。
+        //        传参的时候参数是（ele，index）
+        // var b = $.map(a,function(ele,index){
+        //     return index;
+        // });
+
+        // $.parsrJSON()    将字符串类型的json，解锁成json对象 
+        //                  字符串类型的json要求属性名用双引号引起来
+        // var obj = '{"a":1,"b":2,"c":3,"d":4}';
+        
+        //$.makeArray()     将类数组转化为数组
+        // var obj = {0:"a",1:"b",2:"c",length:3};
+        // console.log($.makeArray(obj)); //将类数组转化为数组
+        // console.log($.makeArray([1,2,3],obj));//将数组，拼接进类数组中
+        // console.log($.makeArray(obj,[1,2]));//将类书组，拼接进数组中
+
+
+        //$.extend() $.fn.extend()  只能用对象的形式进行工具方法或者实例方法的添加。
+        //  克隆方法第一个参数写true，就是深度克隆，没写就是浅层克隆
+        //  后面的参数是克隆的对象，以第一个对象作为基底，将后面对象的内容全部克隆在第一个对象身上
+        //  源码里是这么写的 $.extend = $.fn.extend = function(){}
+
+
+
+
+
+        // $.extend({
+        //     random : function(start,end){
+        //         var len = end - start;
+        //         return Math.random()*len + start;
+        //     }
+        // });
+
+        // $.fn.extend({
+        //     drag : function(){
+        //         var disX,
+        //             disY,
+        //             self = this;
+        //         $(this).on('mousedown',function(e){
+        //             disX = e.pageX - $(this).offset().left;
+        //             disY = e.pageY - $(this).offset().top;
+        //             $(document).on('mousemove',function(e){
+        //                 $(self).css({left : e.pageX - disX,top : e.pageY - disY});
+        //                 console.log(disY);
+        //             });
+        //             $(document).on('mouseup',function(){
+        //                 $(document).off("mousemove").off("mouseup");
+        //             })
+        //         });
+        //         return this;
+        //     }
+        // });
+        // $('.demo').drag();
+
+
+
+
+    </script>
+</body>
+</html>

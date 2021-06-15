@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .demo{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo">
+        <div></div>
+    </div>
+    <!-- <ul>
+        <li>1</li>
+        <li class="ok">2</li>
+        <li>3</li>
+        <li class="ok">4</li>
+        <li>5</li>
+    </ul> -->
+    <!-- <a href="https://www.baidu.com" target="_blank">jump</a> -->
+    <script src="jquery.js"></script>
+    <!-- <script src="myJquery.js"></script> -->
+    <script>
+        //.on()
+        // $('.demo').on('mouseleave',function(){
+        //     alert(0);
+        // })
+    
+
+        // $('.demo').on('click',"","123",function(e){
+        //     alert(e.data);
+        // })
+
+        // $('ul').on('click',"li:even",function(e){
+        //     // if(e.target.nodeName == 'LI'){
+        //         alert($(e.target).text());
+        //     // }
+        // })
+
+        // $('.demo').on({
+        //     click : function(){
+        //         console.log('click');
+        //     },
+        //     mouseenter : function(){
+        //         console.log('mouseenter');
+        //     },
+        //     mouseleave : function(){
+        //         console.log('mouseleave');
+        //     }
+        // })
+        
+        // $('a').one('click',function(){
+        //     window.open("https://www.taobao.com");
+        //     return false;
+        // })
+
+        //对于 .on() 方法的总结
+        //总共可以写入四个参数：1.所要绑定的事件。2.dom选择器。相当于对于想绑定的元素进行了删选
+        //                  3.可以往绑定的函数中传参数，用e.data访问到
+        //                  4.绑定函数
+        //一般而言，选择绑定事件的类型，写入绑定事件函数
+        //对于第二个参数-dom选择器而言，他是用来筛选事件源对象是否为我们所要的dom。一般用于事件委托。
+        //第三个参数，可以让我们把外界的数据存放到e.data上，在需要往绑定函数中传参时使用。
+        //如果传的是字符串的话，jquery会自动理解成要筛选的选择器，导致绑定事件失败，所以在传字符串的时候要保证四参数结构完整。
+        //.on()方法还可以通过以对象的方式，一次性为dom元素添加好多事件。$().on({click:function(){},..});
+        
+
+        //.one() 的用法与.on()完全一致，就是.one()只往选中dom上绑定一次性函数。
+
+        //.off() 解除绑定事件
+        //给选中的元素筐解除之前与之对应的绑定事件
+        //.off() 直接全部解绑 .off("click")解除对应类型的绑定事件 
+        //.off("click",clickOne)解除对应绑定事件中的某一个绑定函数
+        //如果要解除绑定在.on()上的匿名函数 要通过全部解绑，或者解除对应绑定类型的方式才能解除
+
+        //在函数中可以直接用 return false 阻止默认事件和冒泡事件
+
+        //.trigger() 主动触发绑定事件
+        //绑定了click事件，就用$().trigger('click');进行触发，并且也可以触发自定事件
+        //自己定义一个事件，配合逻辑，适时的用trigger进行触发
+        //并且trigger在传想主动触发的事件类型后，可以用数组的形式传递参数。
+
+        //.hover() 相当于往一个jq对象身上绑定了mouseenter和mouseleave
+        //绑定形式：$().hover(function(){移入时触发},function(){移出时触发})
+
+        //去了解一下.mousewheel()
+
+        // $('.demo').selfOn("create",function(){console.log("success")});
+        function a (){
+            console.log('a');
+        }
+        function b (){
+            console.log('b');
+        }
+        $('div').eq(0).on('father',a);
+        $('div').eq(1).on('son',b);
+        $('div').trigger('son');
+    </script>
+</body>
+</html>

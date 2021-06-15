@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- textarea标签，可用于评论区demo  -->
+    
+    <!-- <button>next1</button>
+    <span>ryan</span>
+    <button>next2</button>
+    <span>kight</span> -->
+
+    <div class="demo"></div>
+    <div class="demo">
+        <span></span>
+    </div>
+    <div class="demo">
+        <span></span>
+        <span></span>
+        <p></p>
+    </div>
+    <div class="test">
+        <div class="demo"></div>
+    </div>
+        
+
+
+    <script src="jquery.js"></script>
+    <script>
+        console.log($('input').eq(0).val());
+        // .val() 获取表单信息中的value值
+
+        // $('input').val('hahhahah');
+        //.val() 可以直接对选中dom元素筐中的value进行赋值
+        //.val() 可以添加自定义函数，return的值是 添加给value的值
+        // $('input').val(function(index,oldValue){
+        //     return oldValue + index;
+        // });
+
+
+        //.serialize() 对form表单中对内容进行打包 返回键值对字符串
+        //.serializeArray() 对form表单中对内容进行打包，返回的是数组，数组中的每一位，记录键值对象
+        
+
+        //.next() .next()是选中 $()dom元素筐中，所有元素的下一个兄弟元素节点。
+        //                      可以理解成将下一个兄弟元素节点也装在一个筐里面了。
+        // console.log($('button').next())
+        //.next() 也可以传参数  $('button').next("span") 
+        //在选中的dom元素筐中每一个元素的下一个兄弟元素节点为span标签的兄弟元素
+        
+        //.prev()   选中 $()dom元素筐中，所有元素的上一个兄弟元素节点。 知识点类比.next()
+
+        //.nextAll() 选中 dom元素筐中，每一个元素的 后面所有的兄弟元素节点 
+        //           可以传参数 eg：$().nextAll('input[type="checkbox"]'),对选中对兄弟元素们进行过滤
+
+        //.prevAll() 类比.nextAll() 参数 作用也相同
+
+        //.nextUntil() 选中 dom元素筐中每个元素 后面到哪个兄弟元素为止对所有兄弟元素 
+        //             eg: $().nextUntil('h1') ,选中到h1为止的兄弟元素节点
+        //             然后还可以对这些选中的节点在做一次筛选---添加第二个参数
+        //             eg: $().nextUntil('h1','input[type="checkbox"]');
+
+        //.prevUntil() 类比.nextUntil()；
+
+        //.siblings() 在所选dom元素筐内，选中所有兄弟元素节点，然后填筛选条件。
+        //en：兄弟姐妹  一般用于反选，比如菜单栏，反选功能。
+
+
+
+        //.parent() 在所选dom元素筐内，寻找元素的父级，所选父级可以进行过滤
+        //.parents() 在所选dom元素筐内，寻找元素的所有父级，可以对所选父级进行筛选
+        //.closest() 在所选dom元素筐内，从他自己开始，找寻符合我们筛选条件对父级，亦可以是自己
+        //.offsetParent() 在所选dom元素筐内， 寻找离自己最近对有定位对父级。
+        //.slice() 在所选dom元素筐内，进行截取，从几号位截取到几号位。 底层预测（i=从几，i<到几，i++）
+        // 个人感觉，parents最好用！
+        // console.log($("button").eq(0).parents("ul['data-id']").attr("data-id"));
+
+
+        //.insertBefore() $('p').insertBefore($('div')) insert A before B
+        //.before()       $('div').before($('p')) 在div前插入p 选中元素筐一一执行
+        
+        //.insertAfter()  insert A after B
+        //.after()        在$()筐 后 插入 我们要的东西
+
+        //.appendTo()     把$() 追加到 我们要去的地方
+        //.append()       在$() 下追加 我们要的东西
+
+        //.prependTo()    把$() 前置在 后面元素的前面
+        //.prepend()      在$() 中前置 我们添加的东西
+
+        // 直接记住前后都写 要用jquery包装的dom元素就好了
+        // 无论是前面元素筐 还是后面元素筐 都是符合jquery元素筐特点的，会全部循环执行！
+
+        //.remove() 将选中的元素筐中的东西移除，并且曾经在他身上绑定事件消失（其他不消失）
+        // $('div').css({width:200,height:200}).click(function(){
+        //     alert(0);
+        // });
+
+        //.detach() 将选中的元素筐移除，但不会清除他身上绑定的事件。
+        // $('div').css({width:200,height:200}).click(function(){
+        //     alert(0);
+        // });
+
+        //$("<div></div>")也可以写html标签 然后通过appendTo的方式添加到body中
+
+
+        //.wrap() 为所选元素筐中的每一个元素增加一个直接父级层 可以用.wrap("<div/>")的形式添加 
+        //        增加的父级如果是元素筐的话，那么会取其中的第一个作为父级层
+        //        只要有选中的父级层，那就会将元素筐中的元素一一包上这个父级层。
+        //        也可以用自定义函数的形式，return 的就是父级层。
+        // $('div').wrap(function(index){
+        //     return "<div class="+index+"></div>";
+        // })
+
+        //.wrapInner() 为所选元素筐中的每个元素内置一个隔离层。
+        //             只要有隔离层样式，就可以内置，若是选中的隔离层是元素筐，那就取其第一个
+        //             也可以自定义函数，返回的是隔离层
+        // $('.demo').wrapInner('<div/>');
+        // $('.demo').wrapInner($('div'));
+
+        
+        //.wrapAll() 为所选中的元素筐集体，添加一个直接父级层
+        //           若选中的元素筐内的元素不在同一个层级上
+        //           会将其他元素的内容剪切到第一个元素所在的层级，进行集体打包，添加直接父级层
+        //           和上面的一样，只要有父级层样式，就可以添加。
+        // $('.demo').wrapAll($('.test'));
+
+        
+        //.unWrap() 为所选中的元素筐解绑，使包裹他的父级消失。
+        // $('span').unwrap();
+
+
+        //wrap总结：$选中的元素筐为操作目标,()里的为添加层的样式模版.确定即可,无关选中的样式模版.
+        //所有样式模版都可以通过自定义函数return出来。
+
+
+
+
+        
+
+
+
+
+
+
+
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* .demo{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: red;
+        } */
+    </style>
+</head>
+<body>
+    <!-- <button class="start">start</button>
+    <button class="stop">stop</button>
+    <button class="finish">finish</button> -->
+    <div class="demo" style="background-color: red;"></div>
+    <!-- <div class="demo" style="top: 600px;left: 100px;"></div> -->
+    <!-- <script src="jquery.js"></script> -->
+    <script src="myJquery.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script> -->
+    <!-- jquery 插件 Easing Plugin -->
+    <script>
+
+        //.show() 原始状态需要display：none，可以传时间，从无到有到展示时间，以及运动的线性方式
+        //.hide() 原始状态是显示状态，可以传时间，从无到有到展示时间，以及运动的线性方式
+        //.toggle() .show() 和 .hide() 两种状态的切换。
+
+        //.fadeIn() 淡入 是关于opacity的改变。可以传 改变时间 运动方式 回调函数。
+        //.fadeOut() 淡出 可以传 改变时间 运动方式 回调函数。
+        //.fadeToggle() 淡入 淡出 的状态切换。
+        //.fadeTo() 淡到那种程度到opacity，数值从0-1，可以传 改变时间 淡到程度 运动方式 回调函数
+
+        //.slideDown() 卷帘门式下拉，要求初始状态为不展示。改变展示到高度。可以传 改变时间 运动方式 回调函数
+        //.slideUp() 卷帘门上拉。可以传 改变时间 运动方式 回调函数
+        //.slideToggle() down 和 up 两种状态到切换。
+
+        //.animate() 动画  传参内容 目标点位置和样式 运动时间 运动模式 回调函数
+        
+        // $('.start').on('click',function(){
+        //     $('.demo').animate({left:'+=300'},2000)
+        //                 //.delay(2000)//延迟多少毫秒
+        //                     .animate({left:'+=200'},2000,function(){console.log('over2')});
+        // });
+        // $('.stop').on('click',function(){
+        //     //$('.demo').stop();//立刻终止第一段animate运动，执行后续运动。
+        //     //$('.demo').stop(true);//立刻停止一切运动
+        //     $('.demo').stop(true,true);//立刻停止当前运动并且立刻运动到当且运动终止所在目标点。
+        // });
+        // $('.finish').on('click',function(){
+        //     $('.demo').finish();//立刻运动到最终目标点
+        // });
+
+
+        //.animate() 第一个参数为，运动目标点的样式。
+        //           第二个参数为，运动到目标点所需要的时间。
+        //           第三个参数为，在运动过程中的运动形式。
+        //           第四个参数为，运动完成后的回调函数。
+
+        //.stop() 不传参数时：停止当前执行中的animate，要是有后续，就执行下一个animate.(不会执行第一个animate中的回调函数中的内容)
+        //        传一个true为参数时：停止运动。
+        //        传两个true为参数时：终止当前运动，并跳转到完成当前animate函数后所在的位置。（包括执行完回调函数中的内容）
+
+        //.finish() 终止所有运动，立刻到达所有animate完成后的目标位置上。
+
+        //.delay()  可以添加在两段运动中间，延迟一段时间。参数填写毫秒数。
+
+        //jQuery.fx.off = true;//将把animate所绑定的动画取消，直接移动到每一个目标点。
+
+        //easeOutBounce 类似于弹性碰撞，在结尾处展现。
+
+        //自我入出队体验。
+        // var test2 = 1;
+        // var test = [function(){
+        //     console.log('test');
+        //     },function(){
+        //     console.log('test2')
+        //     },test2];
+        // $('.demo').queue('chain',test);
+
+        //.queue() 入队 为选中dom元素筐创建一个队列 然后往里面填充函数。
+        // 若是传的是数组，即便队列里有填充过东西，都会被现在的数组代替，若后面有继续填充的函数，则放入现在的数组中。
+        // 入队的可以是任何东西，但是非函数出不了队，会报错。
+        //$().queue("chain",function(){})入队
+        //$().queue("chain")查看队列里面的内容
+        //$().dequeue("chain");出队
+        //$().clearQueue("chain")清空队列
+
+        // $('.demo').myQueue('chain',function(next){console.log('兼容1');next()});
+        // $('.demo').myQueue('chain',function(next){console.log('兼容2')});
+        // $('.demo').queue('chain2',function(next){console.log('兼容');next()});
+        // $('.demo').queue('chain2',function(next){console.log('兼容');next()});
+        // $('.demo').myQueue('chain',function(){
+        //     console.log('myqueue');
+        // }).myQueue('chain');
+
+        // $('.demo').myAnimate({width:200,height:200,left:200,top:200},function(){
+        //     $('.demo').myAnimate({width:100,height:100,left:350,top:100});
+        // })
+                    
+
+        //animate 还有疑问
+      
+
+
+    </script>
+</body>
+</html>

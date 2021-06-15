@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tpl{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="tpl">
+            <p></p>
+            <span></span>
+            <button>add</button>
+        </div>
+        <p class="sum">sum</p>
+        <span class="all">0</span>
+    </div>
+    <!-- <table>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Class</th>
+        </tr>
+        <tr class="tpl">
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table> -->
+
+    <!-- <div class="demo" style="width: 100px;height: 100px;background-color: red;" data-name="ryan"></div> -->
+
+
+    <script src="jquery.js"></script>
+    <script>
+        // var stuInform = [
+        //     {
+        //         name : "ryan",
+        //         sex : 18,
+        //         class : 1
+        //     },{
+        //         name : "zcy",
+        //         sex : 19,
+        //         class : 2
+        //     },{
+        //         name : "kight",
+        //         sex : 20,
+        //         class : 3
+        //     }
+        // ];
+        // var table = $('table');
+        // stuInform.forEach(function(ele,index){
+        //     var tpl = $(".tpl").clone().removeClass("tpl");
+        //     tpl.find("td").eq(0).text(ele.name).next().text(ele.sex).next().text(ele.class);
+        //     table.append(tpl);
+        // });
+
+
+        // $('.demo').click(function(){
+        //     alert(0);
+        // })
+        // $('.demo').clone(true).appendTo('body');
+
+
+        // $('.demo').attr('iiii','zcy');
+        // console.log($('.demo').clone(true).appendTo('body').attr('iiii'));
+
+
+        //.clone()  实战中，用于clone模版进行模版化赋值
+        //.clone()  在不传任何参数的时候 无法克隆在dom元素身上绑定的事件。如果想获得，需要传true
+        //.clone()  在遇到往元素身上prop自定义属性的时候，也无法克隆。
+        //         （prop自定义的属性，是不在行间显示到，但是用prop访问得到）
+        //.clone()  在传参true时，可以克隆到用data设置到自定义属性。
+        //         （data自定义属性，也是在行间不显示，但可以用data访问到）
+        //在用clone()的时候，如果想联带隐藏属性一起克隆的话，就用data()设置隐藏属性。
+
+
+        // $('.demo').data({'data-name' : "zcy",sex : true , age : 18});
+        // console.log($('.demo').clone(true).appendTo('body').data('name'));
+        //.data() 在读取时 若遇到行间本来就有的 data- 类型的 和 自己定义的名字相冲突时，优先解析自己定义的
+        //.data() 在读取时 会解析到行间 data- 类型的属性
+        //.data() 能给所选中的元素筐赋予自定义属性值。但是行间不显示.
+
+
+        var productArr = [{
+            name : "nike",
+            id : 01,
+            price : 198
+        },{
+            name : "adidas",
+            id : 02,
+            price : 233
+        },{
+            name : "ryan",
+            id : 001,
+            price : 998
+        }];
+        productArr.forEach(function(ele,index){
+            var tpl = $('.tpl').clone().removeClass('tpl');
+            tpl.data({id : ele.id,price : ele.price}).find('p').text(ele.name).next().text(ele.price);
+            tpl.insertBefore($('.sum'));
+        })
+        $('button').click(function(){
+            $('.all').text(+$('.all').text()+$(this).parent().data("price"));
+        })
+
+
+        //.data() 好在哪里呢？ 当数据和这个dom标签有强对应关系的时候，需要在dom身上存信息存数据
+        //就用.data()的方式，去往这个jquery对象上存。
+        //1.attr，prop说到底还是要操作原生dom的，会影响效率。
+        //2.jquery对象和原生dom是有映射关系的。举个例子，就是为原生dom专门开辟了一个js房间
+        //  通过data()方法对那个js房间存值或取值，减少对原生dom的操作，从而提高效率。
+        //3.什么是vue框架啊？算法 + 原生语言 。通过建立虚拟dom，然后用算法辅助，来计算完成任务的最少dom操作。
+
+    </script>
+</body>
+</html>

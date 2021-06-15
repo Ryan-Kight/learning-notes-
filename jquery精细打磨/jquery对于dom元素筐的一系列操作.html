@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .demo{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin: 10px;
+        }
+        .demo.active{
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div class="demo " ryan1="ryankight"></div>
+    <div class="demo active" ryan="ryan2"></div>
+    <input type="checkbox" checked> -->
+    <div class="demo active"></div>
+    <div class="demo"></div>
+    <div class="demo"></div>
+    <script src="jquery.js"></script>
+    <script>
+        // .html()  可以解析html文档，变为标签
+        // 取值的时候，取出所选元素筐中的第一个（html内容取出）。赋值的时候将所选元素筐中所有元素赋上。
+        // 可以写html中的标签，也可以直接传文本
+        // 更重要的是可以传函数 在选中的dom元素筐中，写入你想要的东西，用return的形式，增添到每一个元素下
+        // console.log($("ul li").html());
+        // $('ul').html("<p style='color:red'>a</p>");
+        // $('ul').html('a');
+        // var nameArr = ["zcy","ryan","kight"];
+        // $('ul li').html(function(index,ele){
+        //     return "<p style='color:red'>"+ nameArr[index] +"</p>";
+        // });
+
+
+        //.text()
+        //取值的时候，将所选元素筐中的text文本全部取出；赋值的时候全部赋上。
+        //也可以传函数。    函数的返回值为填入其中的内容。
+        // console.log($('ul').text());
+
+
+        //.size()
+        //所选元素筐中的元素数量 相当于$( ).length
+
+
+        //.addClass() 为所选dom元素筐增加class名 相当于 js中的 className += 
+        //$().addClass('ryan kight') 就给所选dom元素筐中的元素加上了，ryan和kight两个class名
+        //$().addClass(function(index,ele){ return 返回值来给dom元素筐中的元素一个个的赋上class名})
+        //一般能够给元素筐循环的都会有function（）{} 给我们自己留了一个自定义逻辑的接口。
+
+
+        //.removeClass() 参数什么都不填的话，就直接把选中的dom元素筐里的元素 class名全部删除
+        //$().removeClass('ryan kight') 判断选中的元素筐中的元素有没有含有‘ryan’，‘kight’，有就删除
+        //$().removeClass(function(index,ele){ return 所想删除的class名 }) 返回空串或者undefined，不会删除
+
+        
+        //.hasClass() 判断选中的dom元素筐中有没有填入的class名。并且只要元素筐中的一个拥有，那返回true。
+        
+        //小demo时间
+        // $('.demo').click(function(e){
+        //     // console.log(this); 在函数里的this是原生dom 
+        //     $('.demo').removeClass('active');
+        //     $(this).addClass('active');
+        // })
+
+        //在进行切换样式的过程中，减少用js操作css的步骤，在外界先设定css样式。
+        //通过js控制html然后寻道样式来控制，优化程序效率。
+
+
+        //.css() 可以传两个参数，一个是改变的名称，一个是改变的值
+        //       也可以传一个对象，属性数值一一对应。
+        //.css() 也可以做到取值，填入想要取的属性名。
+
+        //.attr() 基于setAttribute（） 和 getAttribute（）
+        // 取出所选dom元素中的属性值。 
+        // 要是选中的是元素筐，那么就判断元素筐内的第一个元素身上有没有所要获得的属性值
+        // 无论是设置还是查看，都是选择dom元素筐中的第一个进行操作的！
+        // 针对于 selected checked disable 这样的属性，是无法用attr去判断它的状态的
+        // 例如，input复选框中，checked为选中状态，而attr读取时，无论选中与否，返回的都是checked。
+        
+        //.prop() 和js中的dom元素中的特性相互映射，非特性不能映射
+        //.prop() 取值，只能取特性，自定义属性是取不出来的
+        // console.log($('input').prop('checked'));
+        //但是 .prop（）可以反应是否选中的真实状态
+        //.prop()在进行赋值的时候,如果赋的是自定义属性的话，不会映射到行间，也只能可以通过prop去获取。
+        //                         赋的是特性，就可以映射到行间，并且attr()也可以访问到
+
+
+
+
+    </script>
+    
+</body>
+</html>

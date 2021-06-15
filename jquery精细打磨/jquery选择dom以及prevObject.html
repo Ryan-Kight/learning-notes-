@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="jquery.js"></script> -->
+    <script src="myJquery.js"></script>
+</head>
+<body>
+    <!-- <div class="wrapper">
+        <ul>
+            <li class="demo">1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+    </div>
+    <ul>
+        <li class="demo">1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul> -->
+    <div class="wrapper">
+        <div class="demo">1</div>
+        <div class="demo">2</div>
+        <div class="demo">3</div>
+    </div>
+    <div class="test">test</div>
+    <script>
+        // $(".demo").get() get 
+        //想用原生dom的时候，用get方法
+        // 方法参数填索引，获取选中dom元素中第几个元素，其中索引号从负到正，不能超额。
+        // 不填参数，返回元素dom数组
+        // console.log($(".demo").get(-4));
+
+        //jquery链式操作的精髓在于:游标式操作！
+
+        // eq（），选出来一个dom元素 不填参数的话，返回的$对象为空
+        // console.log($('.demo').eq(0));
+
+
+        //.find() 在选中的dom元素筐下寻找dom元素
+        //        在“”也可以直接使用css式选择 ，可以多层选择直接执行
+        //        当中的prevObject是指向 .find()之前的那个元素筐。
+        // console.log($('.demo').find('ul').find("li"));
+
+        //filter()
+        //在dom元素筐里面 通过filter（“...”）删选过滤出来一些dom元素，然后对其进行操作。
+        //.filter(function(index,ele){return true （留下）return false （舍去）});
+
+
+        //.not() 与filter相似 与filter的反选。
+
+
+        //.has() $()选中的元素筐中，此中的元素需要有.has(“”)里面的元素。符合这类要求的元素从元素筐中取出。
+
+
+        //.is() $()选中的元素筐中 是否有 is()中的内容 ，如果有的话返回true。
+        //可以应用在事件委托身上！
+
+        //add() 绑定式操作，选中元素筐，加上另一个元素筐，一起操作
+
+        //end() 回退操作
+
+        $('.wrapper').add('.test').css({backgroundColor:'red'}).end().css({backgroundColor:'blue'});
+
+        
+    </script>
+</body>
+</html>
